@@ -36,6 +36,7 @@ public class ControladorBusqueda {
         return fehcaVIsita;
     }
     public Date guardarInformacion(){
+
         Date infoGuardada;
         return infoGuardada;
     }
