@@ -11,4 +11,26 @@ public class Arrendatario extends Usuario{
         this.preferencial=preferencial;
         this.contrato=contrato;
     }
+    public boolean isLicenciaConduccion() {
+        return licenciaConduccion;
+    }
+
+    public void setLicenciaConduccion(boolean licenciaConduccion) {
+        this.licenciaConduccion = licenciaConduccion;
+    }
+    public boolean isPreferencial() {
+        return preferencial;
+    }
+
+    public void setPreferencial(boolean preferencial) {
+        this.preferencial = preferencial;
+    }
+    public boolean isContrato() {
+        return contrato;
+    }
+
+    public void setContrato(boolean contrato) {
+        this.contrato = contrato;
+    }
+
 }
