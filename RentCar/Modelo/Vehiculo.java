@@ -36,6 +36,22 @@ public class Vehiculo {
         this.kitCarretera = kitCarretera;
         this.fechaVisita = fechaVisita;
     }
+    public Vehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera){
+        this.idTarjetaDePropiedad = idTarjetaDePropiedad;
+        this.cantidadSillas = cantidadSillas;
+        this.numPuertas = numPuertas;
+        this.capacidadLitrosMotor = capacidadLitrosMotor;
+        this.color = color;
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.precioPorDia = precioPorDia;
+        this.tipoVehiculo = tipoVehiculo;
+        this.ciudad = ciudad;
+        this.pais = pais;
+        this.categoria = categoria;
+        this.kitCarretera = kitCarretera;
+    }
     public int getIdTarjetaDePropiedad() {
         return idTarjetaDePropiedad;
     }
@@ -154,6 +170,25 @@ public class Vehiculo {
 
     public void setFechaVisita(Date fechaVisita) {
         this.fechaVisita = fechaVisita;
+    }
+    public String toString() {
+        return "Vehiculo{" +
+                "idTarjetaDePropiedad=" + idTarjetaDePropiedad +
+                ", cantidadSillas=" + cantidadSillas +
+                ", numPuertas=" + numPuertas +
+                ", capacidadLitrosMotor=" + capacidadLitrosMotor +
+                ", color='" + color + '\'' +
+                ", placa='" + placa + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", precioPorDia=" + precioPorDia +
+                ", tipoVehiculo='" + tipoVehiculo + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", pais='" + pais + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", kitCarretera=" + kitCarretera +
+                ", fechaVisita=" + fechaVisita +
+                '}';
     }
 
 }

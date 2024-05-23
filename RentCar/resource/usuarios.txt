@@ -1,0 +1,3 @@
+Arrendador Gabrila Cruz 18 calle131a#53-31 3144138326 gcruzpino@gmail.com Cedula_de_ciudadania 1021670235
+Arrendatario Andres Henao 19 cra8d#191-15 304364568 ahenao@javeriana.edu.co CC 1033097753 true false
+Arrendador Joshua Prieto 18 calle182#45-45 3118468556 joshuaprietro8@@gmail.com CC 1013259685

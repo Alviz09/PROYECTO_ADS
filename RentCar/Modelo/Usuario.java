@@ -1,15 +1,16 @@
 package Modelo;
 
 public  class Usuario {
-    private String nombre;
-    private String apellido;
-    private int edad;
-    private String direccion;
-    private int telefono;
-    private String correoElectronico;
-    private String tipoDeIdentificacion;
-    private int numeroDelIdentificacion;
-    public Usuario(String nombre, String apellido, int edad, String direccion, int telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
+    protected String nombre;
+    protected String apellido;
+    protected int edad;
+    protected String direccion;
+    protected long telefono;
+    protected String correoElectronico;
+    protected String tipoDeIdentificacion;
+    protected int numeroDelIdentificacion;
+
+    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -51,7 +52,7 @@ public  class Usuario {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
@@ -81,5 +82,16 @@ public  class Usuario {
 
     public void setNumeroDelIdentificacion(int numeroDelIdentificacion) {
         this.numeroDelIdentificacion = numeroDelIdentificacion;
+    }
+    public String toString() {
+        return "Usuario: " +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", edad=" + edad +
+                ", direccion='" + direccion + '\'' +
+                ", telefono=" + telefono +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", tipoDeIdentificacion='" + tipoDeIdentificacion + '\'' +
+                ", numeroDelIdentificacion=" + numeroDelIdentificacion ;
     }
 }
