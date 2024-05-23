@@ -1,27 +1,18 @@
 package Modelo;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ListaUsuarios {
-    ArrayList<Usuario> usuarios;
+    private ArrayList<Usuario> usuarios= new ArrayList<>();
 
-    public void cargarUsuarios(ArrayList<Usuario> usuarios) {
+    public ArrayList<Usuario> getUsuarios () {
+        return usuarios;
+
     }
 
-    public ArrayList<Usuario> leerDeArchivos() {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
-        URL resource = getClass().getClassLoader().getResource("usuarios.txt");
-        File file = null;
-        try {
-            file = new File(resource.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        try (BufferedReader entrada = new BufferedReader(new FileReader(file))) {
+    public void leerDeArchivos() {
+        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/usuarios.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {
@@ -40,33 +31,23 @@ public class ListaUsuarios {
                     Boolean licenciaConduccion = Boolean.valueOf(total[9]);
                     Boolean preferencial = Boolean.valueOf(total[10]);
                     Arrendatario nuevoArrendatario = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoDeIdentiicaion, numeroDeIdentificacion, licenciaConduccion, preferencial);
-                    usuarios.add(nuevoArrendatario);
+                    this.usuarios.add(nuevoArrendatario);
                 } else {
                     Arrendador nuevoArrendador = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoDeIdentiicaion, numeroDeIdentificacion);
-                    usuarios.add(nuevoArrendador);
+                    this.usuarios.add(nuevoArrendador);
                 }
             }
             entrada.close();
-            if (!usuarios.isEmpty()) {
-                return usuarios;
-            }
-            return null;
+
         } catch (Exception e) {
             throw new RuntimeException("No se encontro el archivo " + e.getMessage());
         }
     }
 
 
-    public void cargarVehiculosUsuarios(ArrayList<Usuario> usuarios) {
-        Map<Integer, Arrendador> userById = new HashMap<>(this.getUsuarioId(usuarios));
-        URL resource = getClass().getClassLoader().getResource("vehiculos.txt");
-        File file = null;
-        try {
-            file = new File(resource.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        try (BufferedReader entrada = new BufferedReader(new FileReader(file))) {
+    public void cargarVehiculosUsuarios() {
+        Map<Integer, Arrendador> userById = new HashMap<>(this.getUsuarioId(this.usuarios));
+        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {
@@ -93,9 +74,9 @@ public class ListaUsuarios {
         }
     }
 
-    private Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> userList) {
+    private Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> usuarios) {
         ArrayList<Arrendador> filtrados = new ArrayList<>();
-        for (Usuario usuario : userList) {
+        for (Usuario usuario :usuarios ) {
             if (usuario instanceof Arrendador) {
                 filtrados.add((Arrendador) usuario);
             }
@@ -106,12 +87,15 @@ public class ListaUsuarios {
         });
         return userById;
     }
-    //    public static void imprimir(ArrayList<Usuario> usuarios) {
-//        for (Usuario u : usuarios) {
-//            if (u instanceof Arrendador)
-//                System.out.println(((Arrendador) u).getVehiculos());
-//        }
-//    }
+    public Usuario validarExistenciaUsuario(String correoElectronico ){
+        Map<String, Usuario> userByname=new HashMap<>();
+        this.usuarios.forEach(usuario -> {
+            userByname.put(usuario.correoElectronico, usuario);
+        });
+        Usuario encontrado= userByname.get(correoElectronico);
+        return encontrado;
+
+    }
 
 }
 

@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Vehiculo {
@@ -17,25 +18,27 @@ public class Vehiculo {
     private String pais;
     private String categoria;
     private boolean kitCarretera;
-    private Date fechaVisita;
+   // private String autoManual;
+    private LocalDate fechaVisita;
+    private boolean disponibilidad=true;
 
-    public Vehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera, Date fechaVisita) {
-        this.idTarjetaDePropiedad = idTarjetaDePropiedad;
-        this.cantidadSillas = cantidadSillas;
-        this.numPuertas = numPuertas;
-        this.capacidadLitrosMotor = capacidadLitrosMotor;
-        this.color = color;
-        this.placa = placa;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.precioPorDia = precioPorDia;
-        this.tipoVehiculo = tipoVehiculo;
-        this.ciudad = ciudad;
-        this.pais = pais;
-        this.categoria = categoria;
-        this.kitCarretera = kitCarretera;
-        this.fechaVisita = fechaVisita;
-    }
+//    public Vehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera, Date fechaVisita) {
+//        this.idTarjetaDePropiedad = idTarjetaDePropiedad;
+//        this.cantidadSillas = cantidadSillas;
+//        this.numPuertas = numPuertas;
+//        this.capacidadLitrosMotor = capacidadLitrosMotor;
+//        this.color = color;
+//        this.placa = placa;
+//        this.marca = marca;
+//        this.modelo = modelo;
+//        this.precioPorDia = precioPorDia;
+//        this.tipoVehiculo = tipoVehiculo;
+//        this.ciudad = ciudad;
+//        this.pais = pais;
+//        this.categoria = categoria;
+//        this.kitCarretera = kitCarretera;
+//        this.fechaVisita = fechaVisita;
+//    }
     public Vehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera){
         this.idTarjetaDePropiedad = idTarjetaDePropiedad;
         this.cantidadSillas = cantidadSillas;
@@ -164,11 +167,11 @@ public class Vehiculo {
         this.kitCarretera = kitCarretera;
     }
 
-    public Date getFechaVisita() {
+    public LocalDate getFechaVisita() {
         return fechaVisita;
     }
 
-    public void setFechaVisita(Date fechaVisita) {
+    public void setFechaVisita(LocalDate fechaVisita) {
         this.fechaVisita = fechaVisita;
     }
     public String toString() {

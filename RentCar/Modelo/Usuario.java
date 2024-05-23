@@ -1,6 +1,8 @@
 package Modelo;
 
-public  class Usuario {
+import java.util.ArrayList;
+
+public class Usuario {
     protected String nombre;
     protected String apellido;
     protected int edad;
@@ -9,6 +11,7 @@ public  class Usuario {
     protected String correoElectronico;
     protected String tipoDeIdentificacion;
     protected int numeroDelIdentificacion;
+    private ArrayList<Vehiculo> vehiculos=new ArrayList<>();
 
     public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
         this.nombre = nombre;
@@ -20,6 +23,23 @@ public  class Usuario {
         this.tipoDeIdentificacion = tipoDeIdentificacion;
         this.numeroDelIdentificacion = numeroDelIdentificacion;
     }
+
+    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion, ArrayList<Vehiculo> vehiculos) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+        this.tipoDeIdentificacion = tipoDeIdentificacion;
+        this.numeroDelIdentificacion = numeroDelIdentificacion;
+        this.vehiculos = new ArrayList<>();
+    }
+
+    public ArrayList<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -83,6 +103,12 @@ public  class Usuario {
     public void setNumeroDelIdentificacion(int numeroDelIdentificacion) {
         this.numeroDelIdentificacion = numeroDelIdentificacion;
     }
+
+    public void crearVehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera) {
+        Vehiculo nuevo = new Vehiculo(idTarjetaDePropiedad, cantidadSillas, numPuertas, capacidadLitrosMotor, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+        vehiculos.add(nuevo);
+    }
+
     public String toString() {
         return "Usuario: " +
                 "nombre='" + nombre + '\'' +
@@ -92,6 +118,6 @@ public  class Usuario {
                 ", telefono=" + telefono +
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", tipoDeIdentificacion='" + tipoDeIdentificacion + '\'' +
-                ", numeroDelIdentificacion=" + numeroDelIdentificacion ;
+                ", numeroDelIdentificacion=" + numeroDelIdentificacion;
     }
 }
