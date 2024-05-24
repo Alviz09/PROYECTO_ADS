@@ -2,48 +2,42 @@ package Controlador;
 
 import Modelo.Arrendador;
 import Modelo.Arrendatario;
-import Modelo.ListaUsuarios;
+import Modelo.Empresa;
 import Modelo.Usuario;
 import javafx.fxml.FXML;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ControladorRegistro {
-    private ListaUsuarios usuarios = new ListaUsuarios();
+    private  Empresa empresa = Empresa.getInstance();
+
     @FXML
-    public void registrarUsuario(String tipoUsuario, String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
+    public  void registrarUsuario(String tipoUsuario, String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
         if (tipoUsuario.equals("Arrendador")) {
             Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
-            usuarios.getUsuarios().add(nuevo);
+            empresa.getUsuarios().add(nuevo);
         }
         //aca va una excepcion creo
     }
+
     @FXML
     public void registrarUsuario(String tipoUsuario, String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion, boolean licencia, boolean preferencial) {
         if (tipoUsuario.equals("Arrendatario")) {
             Arrendatario nuevo = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion, licencia, preferencial);
-            usuarios.getUsuarios().add(nuevo);
+            empresa.getUsuarios().add(nuevo);
         }
         //aca va una excepcion creo
     }
 
-    public void cargarBaseDeDatos() {
-        usuarios.leerDeArchivos();
-        usuarios.cargarVehiculosUsuarios();
-    }
     @FXML
-    public boolean validarRegistro(String correoElectronico) {
-        boolean validar;
-        if ((usuarios.validarExistenciaUsuario(correoElectronico)) != null)
-            validar = true;
-        else validar = false;
-        return validar;
+    public boolean validarRegistro(String correoElectronico, int paswsword) {
+        validarExistenciaUsuario(correoElectronico);
+        validarContraseñaUsuario(paswsword);
     }
-    @FXML
-    public LocalDate darFechaEvaluacion() {
+
+    private LocalDate darFechaEvaluacion() {
         LocalDate actual = LocalDate.now();
         LocalDate fin = actual.plusWeeks(2);
         long startEpochDay = actual.toEpochDay();
@@ -52,20 +46,43 @@ public class ControladorRegistro {
         LocalDate fechaVisita = LocalDate.ofEpochDay(f);
         return fechaVisita;
     }
-    public void setFechaEvaluacion(){
-        usuarios.getUsuarios().forEach(usuario -> {
-            if(usuario instanceof Arrendador){
+
+    public void setFechaEvaluacion(ArrayList<Usuario> usuarios) {
+        usuarios.forEach(usuario -> {
+            if (usuario instanceof Arrendador) {
                 usuario.getVehiculos().forEach(vehiculo -> {
-                    vehiculo.setFechaVisita(darFechaEvaluacion());
+                    LocalDate fechaEvaluacion = darFechaEvaluacion();
+                    if (fechaEvaluacion != null) {
+                        vehiculo.setFechaVisita(fechaEvaluacion);
+                    }
                 });
             }
         });
+    }
 
+    private boolean validarExistenciaUsuario(String correoElectronico) {
+        Map<String, Usuario> userByname = new HashMap<>();
+        empresa.getUsuarios().forEach(usuario -> {
+            userByname.put(usuario.getCorreoElectronico(), usuario);
+        });
+        if ((userByname.get(correoElectronico)) != null) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
-    public void imprimir() {
-        System.out.println(usuarios.getUsuarios());
-        usuarios.getUsuarios().forEach(usuario -> System.out.println(usuario.getVehiculos()));
+    private boolean validarContraseñaUsuario(int numeroId) {
+        Map<Integer, Usuario> userBypassword = new HashMap<>();
+        empresa.getUsuarios().forEach(usuario -> {
+            userBypassword.put(usuario.getNumeroDelIdentificacion(), usuario);
+        });
+        if ((userBypassword.get(numeroId)) != null) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
