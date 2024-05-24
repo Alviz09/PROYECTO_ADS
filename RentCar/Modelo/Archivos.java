@@ -3,6 +3,7 @@ package Modelo;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Archivos {
@@ -45,6 +46,7 @@ public class Archivos {
     }
     public static ArrayList<Oficina> cargarOficinas() {
         ArrayList<Oficina> oficinas = new ArrayList<>();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/oficinas.txt"))) {
             String linea;
             String total[];
@@ -56,12 +58,12 @@ public class Archivos {
                     return null;
                 }
                 linea.strip();
-                total = linea.split("\\s+");
+                total = linea.split("\s+");
                 id = Integer.parseInt(total[0]);
                 pais = total[1];
                 ciudad = total[2];
-                LocalTime horaInicio = LocalTime.parse(total[3]);
-                LocalTime horaFin = LocalTime.parse(total[4]);
+                LocalTime horaInicio = LocalTime.parse(total[3], timeFormatter);
+                LocalTime horaFin = LocalTime.parse(total[4], timeFormatter);
                 oficinas.add(new Oficina(id, pais, ciudad, horaInicio, horaFin));
             }
             return oficinas;
