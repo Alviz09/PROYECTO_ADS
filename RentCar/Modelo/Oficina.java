@@ -1,50 +1,63 @@
 package Modelo;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Oficina {
     private int id;
     private String pais;
     private String ciudad;
-    private int horaInicioJornada;
-    private int horaFinJornada;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private ArrayList<Vehiculo> vehiculos;
-/* este metodo sobra
-    public Vehiculo buscarVehiculo( int idVehiculo){
-        Vehiculo encontrado = null;
-        return encontrado;
+
+
+    public Oficina(int id, String pais, String ciudad, LocalTime horaInicio, LocalTime horaFin) {
+        this.id = id;
+        this.pais = pais;
+        this.ciudad = ciudad;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
-*/
     public int getId() {
         return id;
+    }
+
+
+    public String getPais() {
+        return pais;
+    }
+
+    public String getCiudad() {
+        return  ciudad;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getPais() {
-        return pais;
-    }
-
     public void setPais(String pais) {
         this.pais = pais;
     }
 
-    public int getHoraInicioJornada() {
-        return horaInicioJornada;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public void setHoraInicioJornada(int horaInicioJornada) {
-        this.horaInicioJornada = horaInicioJornada;
+    public LocalTime getHoraInicioJornada() {
+        return horaInicio;
     }
 
-    public int getHoraFinJornada() {
-        return horaFinJornada;
+    public void setHoraInicioJornada(LocalTime horaInicioJornada) {
+        this.horaInicio = horaInicioJornada;
     }
 
-    public void setHoraFinJornada(int horaFinJornada) {
-        this.horaFinJornada = horaFinJornada;
+    public LocalTime getHoraFinJornada() {
+        return horaFin;
+    }
+
+    public void setHoraFinJornada(LocalTime horaFinJornada) {
+        this.horaFin = horaFinJornada;
     }
 
     public ArrayList<Vehiculo> getVehiculos() {

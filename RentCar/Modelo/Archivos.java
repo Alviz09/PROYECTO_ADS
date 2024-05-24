@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Archivos {
@@ -41,7 +43,32 @@ public class Archivos {
             throw new RuntimeException("No se encontro el archivo " + e.getMessage());
         }
     }
-
+    public static ArrayList<Oficina> cargarOficinas() {
+        ArrayList<Oficina> oficinas = new ArrayList<>();
+        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/oficinas.txt"))) {
+            String linea;
+            String total[];
+            int id;
+            String pais;
+            String ciudad;
+            while ((linea = entrada.readLine()) != null) {
+                if (linea.isEmpty()){
+                    return null;
+                }
+                linea.strip();
+                total = linea.split("\\s+");
+                id = Integer.parseInt(total[0]);
+                pais = total[1];
+                ciudad = total[2];
+                LocalTime horaInicio = LocalTime.parse(total[3]);
+                LocalTime horaFin = LocalTime.parse(total[4]);
+                oficinas.add(new Oficina(id, pais, ciudad, horaInicio, horaFin));
+            }
+            return oficinas;
+        } catch (Exception e) {
+            throw new RuntimeException("No se encontro el archivo " + e.getMessage());
+        }
+    }
 
     public static void cargarVehiculosUsuarios(ArrayList<Usuario> usuarios) {
         Map<Integer, Arrendador> userById = new HashMap<>(getUsuarioId(usuarios));
