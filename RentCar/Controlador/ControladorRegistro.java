@@ -6,11 +6,16 @@ import Modelo.Empresa;
 import Modelo.Usuario;
 import javafx.fxml.FXML;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ControladorRegistro {
+    @FXML
+    private Button login,register;
+    @FXML
+    private TextField eMail, password;
     private  Empresa empresa = Empresa.getInstance();
 
     @FXML
@@ -31,58 +36,38 @@ public class ControladorRegistro {
         //aca va una excepcion creo
     }
 
-    @FXML
-    public boolean validarRegistro(String correoElectronico, int paswsword) {
-        validarExistenciaUsuario(correoElectronico);
-        validarContraseñaUsuario(paswsword);
+   // @FXML
+
+
+//    private LocalDate darFechaEvaluacion() {
+//        LocalDate actual = LocalDate.now();
+//        LocalDate fin = actual.plusWeeks(2);
+//        long startEpochDay = actual.toEpochDay();
+//        long endEpochDay = fin.toEpochDay();
+//        long f = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay + 1);
+//        LocalDate fechaVisita = LocalDate.ofEpochDay(f);
+//        return fechaVisita;
+//    }
+//
+//    public void setFechaEvaluacion(ArrayList<Usuario> usuarios) {
+//        usuarios.forEach(usuario -> {
+//            if (usuario instanceof Arrendador) {
+//                usuario.getVehiculos().forEach(vehiculo -> {
+//                    LocalDate fechaEvaluacion = darFechaEvaluacion();
+//                    if (fechaEvaluacion != null) {
+//                        vehiculo.setFechaVisita(fechaEvaluacion);
+//                    }
+//                });
+//            }
+//        });
+//    }
+    public boolean validarRegistro( ) {
+        String correoElectronico= eMail.getText().trim();
+        String contraseña= password.getText().trim();
+        int contrasena=Integer.parseInt(contraseña);
+        return empresa.getUsuarios().stream()
+                .anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico) &&
+                        usuario.getNumeroDelIdentificacion() == contrasena);
     }
 
-    private LocalDate darFechaEvaluacion() {
-        LocalDate actual = LocalDate.now();
-        LocalDate fin = actual.plusWeeks(2);
-        long startEpochDay = actual.toEpochDay();
-        long endEpochDay = fin.toEpochDay();
-        long f = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay + 1);
-        LocalDate fechaVisita = LocalDate.ofEpochDay(f);
-        return fechaVisita;
-    }
-
-    public void setFechaEvaluacion(ArrayList<Usuario> usuarios) {
-        usuarios.forEach(usuario -> {
-            if (usuario instanceof Arrendador) {
-                usuario.getVehiculos().forEach(vehiculo -> {
-                    LocalDate fechaEvaluacion = darFechaEvaluacion();
-                    if (fechaEvaluacion != null) {
-                        vehiculo.setFechaVisita(fechaEvaluacion);
-                    }
-                });
-            }
-        });
-    }
-
-    private boolean validarExistenciaUsuario(String correoElectronico) {
-        Map<String, Usuario> userByname = new HashMap<>();
-        empresa.getUsuarios().forEach(usuario -> {
-            userByname.put(usuario.getCorreoElectronico(), usuario);
-        });
-        if ((userByname.get(correoElectronico)) != null) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    private boolean validarContraseñaUsuario(int numeroId) {
-        Map<Integer, Usuario> userBypassword = new HashMap<>();
-        empresa.getUsuarios().forEach(usuario -> {
-            userBypassword.put(usuario.getNumeroDelIdentificacion(), usuario);
-        });
-        if ((userBypassword.get(numeroId)) != null) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 }

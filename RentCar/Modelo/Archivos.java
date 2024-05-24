@@ -3,15 +3,9 @@ package Modelo;
 import java.io.*;
 import java.util.*;
 
-public class ListaUsuarios {
-    private ArrayList<Usuario> usuarios= new ArrayList<>();
-
-    public ArrayList<Usuario> getUsuarios () {
-        return usuarios;
-
-    }
-
-    public void leerDeArchivos() {
+public class Archivos {
+    public static ArrayList<Usuario> cargarUsuarios() {
+        ArrayList<Usuario> usuarios= new ArrayList<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/usuarios.txt"))) {
             String linea;
             String total[];
@@ -31,13 +25,17 @@ public class ListaUsuarios {
                     Boolean licenciaConduccion = Boolean.valueOf(total[9]);
                     Boolean preferencial = Boolean.valueOf(total[10]);
                     Arrendatario nuevoArrendatario = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoDeIdentiicaion, numeroDeIdentificacion, licenciaConduccion, preferencial);
-                    this.usuarios.add(nuevoArrendatario);
+                    usuarios.add(nuevoArrendatario);
                 } else {
                     Arrendador nuevoArrendador = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoDeIdentiicaion, numeroDeIdentificacion);
-                    this.usuarios.add(nuevoArrendador);
+                  usuarios.add(nuevoArrendador);
                 }
             }
             entrada.close();
+            if (!usuarios.isEmpty()) {
+                return usuarios;
+            }
+            return null;
 
         } catch (Exception e) {
             throw new RuntimeException("No se encontro el archivo " + e.getMessage());
@@ -45,8 +43,8 @@ public class ListaUsuarios {
     }
 
 
-    public void cargarVehiculosUsuarios() {
-        Map<Integer, Arrendador> userById = new HashMap<>(this.getUsuarioId(this.usuarios));
+    public static void cargarVehiculosUsuarios(ArrayList<Usuario> usuarios) {
+        Map<Integer, Arrendador> userById = new HashMap<>(getUsuarioId(usuarios));
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
             String linea;
             String total[];
@@ -74,9 +72,9 @@ public class ListaUsuarios {
         }
     }
 
-    private Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> usuarios) {
+    private static Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> usuarios) {
         ArrayList<Arrendador> filtrados = new ArrayList<>();
-        for (Usuario usuario :usuarios ) {
+        for (Usuario usuario : usuarios) {
             if (usuario instanceof Arrendador) {
                 filtrados.add((Arrendador) usuario);
             }
@@ -86,15 +84,6 @@ public class ListaUsuarios {
             userById.put(usuario.getNumeroDelIdentificacion(), usuario);
         });
         return userById;
-    }
-    public Usuario validarExistenciaUsuario(String correoElectronico ){
-        Map<String, Usuario> userByname=new HashMap<>();
-        this.usuarios.forEach(usuario -> {
-            userByname.put(usuario.correoElectronico, usuario);
-        });
-        Usuario encontrado= userByname.get(correoElectronico);
-        return encontrado;
-
     }
 
 }
