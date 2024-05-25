@@ -23,7 +23,6 @@ public class Archivos {
                 String correoElectronico = total[6];
                 String tipoDeIdentiicaion = total[7];
                 int numeroDeIdentificacion = Integer.parseInt(total[8]);
-
                 if (tipoUsuario.equals("Arrendatario")) {
                     Boolean licenciaConduccion = Boolean.valueOf(total[9]);
                     Boolean preferencial = Boolean.valueOf(total[10]);
@@ -72,14 +71,17 @@ public class Archivos {
         }
     }
 
-    public static HashMap<Integer, Vehiculo> cargarVehiculosPorUsuario() {
-        HashMap<Integer, Vehiculo> vehiculosPorUsuario = new HashMap<>();
+    public static ArrayList<Vehiculo> cargarVehiculosUsuarios(ArrayList<Usuario> usuarios,ArrayList<Oficina> oficinas) {
+        Map<Integer, Usuario> userById = new HashMap<>(getUsuarioId(usuarios));
+        Map<Integer, Oficina> officeById = new HashMap<>(getOfficeById(oficinas));
+        ArrayList<Vehiculo> vehiculos=new ArrayList<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {
                 total = linea.split("\\s+");
                 int idUser = Integer.parseInt(total[0]);
+                int idOffice=Integer.parseInt(total[1]);
                 int idTarjetaDePropiedad0 = Integer.parseInt(total[2]);
                 int cantidadSillas = Integer.parseInt(total[3]);
                 int numPuertas = Integer.parseInt(total[4]);
@@ -94,10 +96,16 @@ public class Archivos {
                 String pais = total[13];
                 String categoria = total[14];
                 boolean kitCarretera = Boolean.parseBoolean(total[15]);
-                Vehiculo vehiculo = new Vehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
-                vehiculosPorUsuario.put(idUser, vehiculo);
+                Vehiculo nuevo=new Vehiculo (idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                userById.get(idUser).crearVehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                officeById.get(idOffice).crearVehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                vehiculos.add(nuevo);
             }
-            return vehiculosPorUsuario;
+            entrada.close();
+            if (!vehiculos.isEmpty()) {
+                return vehiculos;
+            }
+            return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -105,15 +113,10 @@ public class Archivos {
 
 
 
-    private static Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> usuarios) {
-        ArrayList<Arrendador> filtrados = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Arrendador) {
-                filtrados.add((Arrendador) usuario);
-            }
-        }
-        Map<Integer, Arrendador> userById = new HashMap<>();
-        filtrados.forEach(usuario -> {
+    private static Map<Integer, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
+
+        Map<Integer, Usuario> userById = new HashMap<>();
+        usuarios.forEach(usuario -> {
             userById.put(usuario.getNumeroDelIdentificacion(), usuario);
         });
         return userById;

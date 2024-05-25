@@ -167,6 +167,7 @@ public class Vehiculo {
     public void setKitCarretera(boolean kitCarretera) {
         this.kitCarretera = kitCarretera;
     }
+    public void setDisponibilidad(boolean disponibilidad){this.disponibilidad=disponibilidad;}
 
     public LocalDate getFechaVisita() {
         return fechaVisita;

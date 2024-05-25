@@ -48,6 +48,7 @@ public class ControladorRegistro {
             Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
             empresa.getUsuarios().add(nuevo);
             mostrarMensaje("incio existoso");
+            volverAMainView();
             // Muestra un mensaje de éxito si se agrega correctamente
         } catch (NumberFormatException e) {
             // Maneja errores de formato de número

@@ -46,6 +46,11 @@ public Arrendatario(String nombre, String apellido, int edad, String direccion, 
     public int getLeaseNumber(){
         return leaseNumber;
     }
+    public void cambiarDisponibilida(){
+        this.getVehiculos().forEach(vehiculo -> {
+            vehiculo.setDisponibilidad(false);
+        });
+    }
     public void increaseLeaseNumber(){
         this.leaseNumber++;
     }
