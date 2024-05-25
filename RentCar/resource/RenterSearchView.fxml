@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ControladorBusqueda">
+    <left>
+        <AnchorPane prefHeight="484.0" prefWidth="395.0" style="-fx-background-color: CFCFCF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="38.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../logo.png" />
+                    </image>
+                </ImageView>
+            <TextField fx:id="txtMostrador" layoutX="73.0" layoutY="29.0" prefHeight="408.0" prefWidth="246.0" />
+            </children>
+        </AnchorPane>
+    </left>
+   <right>
+        <AnchorPane prefHeight="484.0" prefWidth="469.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="mostrarOficinas" layoutX="69.0" layoutY="86.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="320.0" style="-fx-background-color: CFCFCF;" text="Mostrar oficinas" />
+                <Button fx:id="mostrarVehiculos" layoutX="124.0" layoutY="191.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos de oficina" />
+                <Label alignment="CENTER" layoutX="91.0" layoutY="20.0" prefHeight="18.0" prefWidth="276.0" text="Buscador para el mejor cliente">
+                    <font>
+                        <Font name="Verdana" size="14.0" />
+                    </font>
+                    <effect>
+                        <Bloom />
+                    </effect>
+                </Label>
+            <Label layoutX="76.0" layoutY="143.0" prefHeight="17.0" prefWidth="113.0" text="Ingresa id de oficina" />
+            <TextField fx:id="ingresoOficina" layoutX="218.0" layoutY="139.0" />
+            <Label layoutX="76.0" layoutY="255.0" prefHeight="17.0" prefWidth="125.0" text="ingresa id de vehiculo" />
+            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="251.0" />
+            <Button fx:id="volverBuscadorVehiculo" layoutX="124.0" layoutY="329.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
+            </children>
+        </AnchorPane>
+   </right>
+</BorderPane>
