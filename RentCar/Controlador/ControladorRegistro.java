@@ -29,10 +29,7 @@ public class ControladorRegistro {
     private Label mensajeInicioDeSesion;
     private Empresa empresa = Empresa.getInstance();
 
-    public void salirOnAction(){
-        Stage stage= (Stage) salir.getScene().getWindow();
-        stage.close();
-    }
+
 
     public void registrarArrendador() {
         try {
@@ -89,33 +86,8 @@ public class ControladorRegistro {
         });
     }
 
-    @FXML
-    public void validarRegistro() throws Exception{
-        try {
-            String correoElectronico = eMail.getText().trim();
-            String contraseña = password.getText().trim();
-            int contrasena = Integer.parseInt(contraseña);
-            boolean existe = empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico) && usuario.getNumeroDelIdentificacion() == contrasena);
 
-            if (existe == true)
-                mensajeInicioDeSesion.setText("inicio de sesion existoso");
-            else
-                mensajeInicioDeSesion.setText("Usuario o contrasñea no existen, intente otra vez");
-        }catch (NumberFormatException e){
-            mostrarMensaje("Su contraseña es su ID");
-        }
-    }
-    @FXML
-    public void registroOnAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RegisterView.fxml"));
-            Stage stage = (Stage) registrarse.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     @FXML
     public void registroArrendadorOnAction() {
         try {

@@ -1,9 +1,7 @@
 package Controlador;
 
-import Modelo.Arrendador;
-import Modelo.Arrendatario;
-import Modelo.Empresa;
-import Modelo.Usuario;
+import Modelo.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ControladorBusqueda {
 
 
-    public TextField txtMostradorFinViaje;
+    public TextArea txtMostradorFinViaje;
     public Button volverBuscador;
     public TextField ingresoVehiculo;
     public TextField ingresoOficina;
@@ -32,27 +29,25 @@ public class ControladorBusqueda {
     public Button finViaje;
     public Button adicionarTiempo;
     public Button cerrarSesionArrendador;
-    public TextField txtMostrador1;
+    public TextArea txtMostrador1;
+    public TextArea txtPlacaVehiculo;
+    public Button volverFinViaje;
+    public Button mostrarVehiculosEnPropiedad;
     private Empresa empresa = Empresa.getInstance();
 
 
 
 
-    public void ejecutarBuscadorArrendatario(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RenterSearchView.fxml"));
-            Stage stage = (Stage) buscarVehiculo.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void mostrarPantalla(javafx.event.ActionEvent actionEvent) {
     }
 
     public void mostrarOficinas(javafx.event.ActionEvent actionEvent) {
+        txtMostrador1.setText("");
+        for(Oficina s : empresa.getOficinas()){
+
+            txtMostrador1.appendText("id: " + s.getId() + " \nPais: "+ s.getPais()+ " \nCiudad: "+ s.getCiudad() +"\n");
+        }
     }
 
     public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {
@@ -68,6 +63,7 @@ public class ControladorBusqueda {
     }
 
     public void ejecutarBuscadorArrendatario(javafx.event.ActionEvent actionEvent) {
+
     }
 
     public void PagarViaje(javafx.event.ActionEvent actionEvent) {
@@ -80,7 +76,23 @@ public class ControladorBusqueda {
     }
 
     public void cerrarSesion(javafx.event.ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MainView.fxml"));
+            Stage stage = (Stage) cerrarSesionArrendador.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void datoPlacaVehiculo(ActionEvent actionEvent) {
+    }
+
+    public void eliminarVehiculo(ActionEvent actionEvent) {
+    }
+
+    public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
     }
 }
 /*
