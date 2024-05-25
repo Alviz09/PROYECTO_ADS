@@ -9,9 +9,11 @@ public class Empresa {
     private static ArrayList<Oficina> oficinas  = new ArrayList<>(Archivos.cargarOficinas());
     private static ArrayList<Vehiculo> vehiculos  = new ArrayList<>(Archivos.cargarVehiculosUsuarios(usuarios,oficinas));
 
-    private Empresa(){}
+    private Empresa(){
+    }
 
     public static Empresa getInstance(){
+
         return EMPRESA;
     }
 
