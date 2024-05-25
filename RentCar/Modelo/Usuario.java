@@ -3,6 +3,7 @@ package Modelo;
 import java.util.ArrayList;
 
 public class Usuario {
+
     protected String nombre;
     protected String apellido;
     protected int edad;
@@ -108,6 +109,8 @@ public class Usuario {
         Vehiculo nuevo = new Vehiculo(idTarjetaDePropiedad, cantidadSillas, numPuertas, capacidadLitrosMotor, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
         vehiculos.add(nuevo);
     }
+
+
 
     public String toString() {
         return "Usuario: " +

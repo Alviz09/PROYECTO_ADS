@@ -72,34 +72,38 @@ public class Archivos {
         }
     }
 
-    public static void cargarVehiculosUsuarios(ArrayList<Usuario> usuarios) {
-        Map<Integer, Arrendador> userById = new HashMap<>(getUsuarioId(usuarios));
+    public static HashMap<Integer, Vehiculo> cargarVehiculosPorUsuario() {
+        HashMap<Integer, Vehiculo> vehiculosPorUsuario = new HashMap<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {
                 total = linea.split("\\s+");
                 int idUser = Integer.parseInt(total[0]);
-                int idTarjetaDePropiedad0 = Integer.parseInt(total[1]);
-                int cantidadSillas = Integer.parseInt(total[2]);
-                int numPuertas = Integer.parseInt(total[3]);
-                float capacidadLitrosMoto = Float.parseFloat(total[4]);
-                String color = total[5];
-                String placa = total[6];
-                String marca = total[7];
-                String modelo = total[8];
-                float precioPorDia = Float.parseFloat(total[9]);
-                String tipoVehiculo = total[10];
-                String ciudad = total[11];
-                String pais = total[12];
-                String categoria = total[13];
-                boolean kitCarretera = Boolean.parseBoolean(total[14]);
-                userById.get(idUser).crearVehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                int idTarjetaDePropiedad0 = Integer.parseInt(total[2]);
+                int cantidadSillas = Integer.parseInt(total[3]);
+                int numPuertas = Integer.parseInt(total[4]);
+                float capacidadLitrosMoto = Float.parseFloat(total[5]);
+                String color = total[6];
+                String placa = total[7];
+                String marca = total[8];
+                String modelo = total[9];
+                float precioPorDia = Float.parseFloat(total[10]);
+                String tipoVehiculo = total[11];
+                String ciudad = total[12];
+                String pais = total[13];
+                String categoria = total[14];
+                boolean kitCarretera = Boolean.parseBoolean(total[15]);
+                Vehiculo vehiculo = new Vehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                vehiculosPorUsuario.put(idUser, vehiculo);
             }
+            return vehiculosPorUsuario;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 
     private static Map<Integer, Arrendador> getUsuarioId(ArrayList<Usuario> usuarios) {
         ArrayList<Arrendador> filtrados = new ArrayList<>();
