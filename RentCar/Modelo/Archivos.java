@@ -113,7 +113,7 @@ public class Archivos {
 
 
 
-    private static Map<Integer, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
+    public static Map<Integer, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
 
         Map<Integer, Usuario> userById = new HashMap<>();
         usuarios.forEach(usuario -> {
@@ -121,7 +121,7 @@ public class Archivos {
         });
         return userById;
     }
-    private static Map<Integer, Oficina> getOfficeById(ArrayList<Oficina> oficinas) {
+    public static Map<Integer, Oficina> getOfficeById(ArrayList<Oficina> oficinas) {
         Map<Integer, Oficina> officeById= new HashMap<>();
         oficinas.forEach(oficina -> {
             officeById.put(oficina.getId(), oficina);
@@ -129,6 +129,55 @@ public class Archivos {
         return officeById;
     }
 
+    public static void escribirArchivos(ArrayList<Usuario> usuarios) {
+        try (BufferedWriter bwu = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/usuarios.txt", true))){
+            try(BufferedWriter bwv = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/vehiculos.txt", true))) {
+                for(Usuario usuario : usuarios) {
+                    bwu.write(usuario.getClass().getSimpleName() + " " +
+                            usuario.getNombre() + " " +
+                            usuario.getApellido() + " " +
+                            String.valueOf(usuario.getEdad()) + " " +
+                            usuario.getDireccion() + " " +
+                            Long.toString(usuario.getTelefono()) + " " +
+                            usuario.getCorreoElectronico() + " " +
+                            usuario.getTipoDeIdentificacion() + " " +
+                            usuario.getNumeroDelIdentificacion());
+                    for(Vehiculo vehiculo : usuario.getVehiculos()) {
+                        String oficinaId = vehiculo.getCiudad();
+                        if(oficinaId == "Cali") {
+                            oficinaId = "58402";
+                        }
+                        if(oficinaId == "Bogota") {
+                            oficinaId = "19827";
+                        }
+                        else {
+                            oficinaId = "45036";
+                        }
+                        bwv.write(usuario.getNumeroDelIdentificacion() + " " +
+                                oficinaId + " " +
+                                String.valueOf(vehiculo.getIdTarjetaDePropiedad()) + " " +
+                                String.valueOf(vehiculo.getCantidadSillas()) + " " +
+                                String.valueOf(vehiculo.getNumPuertas()) + " " +
+                                String.valueOf(vehiculo.getCapacidadLitrosMotor()) + " " +
+                                vehiculo.getColor() + " " +
+                                vehiculo.getPlaca() + " " +
+                                vehiculo.getMarca() + " " +
+                                vehiculo.getModelo() + " " +
+                                String.valueOf(vehiculo.getPrecioPorDia()) + " " +
+                                vehiculo.getTipoVehiculo() + " " +
+                                vehiculo.getCiudad() + " " +
+                                vehiculo.getPais() + " " +
+                                vehiculo.getCategoria() + " " +
+                                String.valueOf(vehiculo.isKitCarretera()));
 
+                    }
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
 
