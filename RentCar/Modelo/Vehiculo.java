@@ -55,6 +55,7 @@ public class Vehiculo {
         this.categoria = categoria;
         this.kitCarretera = kitCarretera;
     }
+
     public int getIdTarjetaDePropiedad() {
         return idTarjetaDePropiedad;
     }

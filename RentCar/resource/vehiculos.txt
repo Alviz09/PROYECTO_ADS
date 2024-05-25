@@ -1,3 +1,9 @@
-1021670235 123456 5 4 2.0 Rojo ABC123 Toyota Corolla 50.0 Automovil Bogotá Colombia Economico true
-1013259685 234567 7 5 3.5 Azul DEF456 Ford Explorer 75.0 SUV Medellín Colombia Lujo true
-1013259685 345678 2 3 1.6 Blanco GHI789 Honda Civic 40.0 Coupe Cali Colombia Deportivo false
+1021670235 19827 123456 4 2 2.0 Rojo ABC123 Toyota Corolla 50.0 Automovil Bogotá Colombia Economico true
+1013259685 45036 234567 4 4 3.5 Azul DEF456 Ford Explorer 75.0 SUV Medellín Colombia Lujo true
+1033097753 58402 345678 2 2 4.2 Blanco HIJ456 Honda Civic 40.0 Coupe Cali Colombia Deportivo false
+1098765432 58402 345123 2 2 5.0  Rojo GHI789 Toyota Corolla 50.0 Sedan Cali Colombia Lujo true
+1013259685 19827 845732 4 4 1.8 Negro STU901 Honda Civic 55.0 Sedan Bogotá Colombia Deportivo false
+1098765432 19827 367541 4 4 3.5  Negro VWX234 Audi A4 100.0 Coupe Bogotá Colombia Economico true
+1098765432 45036 912345 4 2 2.2 Blanco YZA567 BMW 3_Series 75.0 Camioneta Medellín Colombia Lujo true
+1054321987 58402 658794 2 2 4.0 Azul BCD890 Ford Mustang 150.0 Sedan Cali Colombia Deportivo false
+1054321987 45036 273681 4 4 1.6 Verde EFG123 Chevrolet Silverado 100.0 Sedan Medellín Colombia Economico false
