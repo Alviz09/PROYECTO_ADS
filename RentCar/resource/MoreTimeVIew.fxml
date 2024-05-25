@@ -19,7 +19,7 @@
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextField fx:id="txtMostradorFinViaje" layoutX="87.0" layoutY="37.0" onAction="#mostrarPantalla" prefHeight="327.0" prefWidth="199.0" />
+                <TextField fx:id="txtMostradorAgregarTiempo" layoutX="87.0" layoutY="37.0" onAction="#mostrarPantalla" prefHeight="327.0" prefWidth="199.0" />
             </children>
         </AnchorPane>
     </left>
@@ -27,7 +27,7 @@
         <AnchorPane prefHeight="400.0" prefWidth="321.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="mostrarVehiculosEnPropiedad" layoutX="59.0" layoutY="114.0" mnemonicParsing="false" onAction="#ejecutarBuscadorArrendatario" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos alquilados" />
-                <Label alignment="CENTER" layoutX="26.0" layoutY="59.0" prefHeight="15.0" prefWidth="276.0" text="FIn Del Viaje">
+                <Label alignment="CENTER" layoutX="26.0" layoutY="59.0" prefHeight="15.0" prefWidth="276.0" text="Agregar tiempo">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
@@ -35,10 +35,10 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="volverFinViaje" layoutX="58.0" layoutY="262.0" mnemonicParsing="false" onAction="#volverMenuArrendador" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
-                <Button fx:id="finViaje" layoutX="58.0" layoutY="208.0" mnemonicParsing="false" onAction="#eliminarVehiculo" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="eliminar Vehiculo" />
-            <TextField fx:id="txtPlacaVehiculo" layoutX="142.0" layoutY="164.0" onAction="#datoPlacaVehiculo" prefHeight="28.0" prefWidth="127.0" />
-            <Label layoutX="63.0" layoutY="169.0" prefHeight="17.0" prefWidth="79.0" text="Placa Vehiculo" />
+                <Button fx:id="volverMasTiempo" layoutX="58.0" layoutY="262.0" mnemonicParsing="false" onAction="#volverMenuArrendador" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
+                <Button fx:id="agregarTiempo" layoutX="58.0" layoutY="208.0" mnemonicParsing="false" onAction="#agregarTiempo" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Agregar tiempo" />
+                <TextField fx:id="txtPlacaVehiculoFinViaje" layoutX="142.0" layoutY="164.0" onAction="#IngresoPlaca" prefHeight="28.0" prefWidth="127.0" />
+                <Label layoutX="63.0" layoutY="169.0" prefHeight="17.0" prefWidth="79.0" text="Placa Vehiculo" />
             </children>
         </AnchorPane>
     </center>
