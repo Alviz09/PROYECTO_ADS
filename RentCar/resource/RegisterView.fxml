@@ -32,7 +32,7 @@
       <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="registarArrendador" layoutX="22.0" layoutY="146.0" mnemonicParsing="false" onAction="#registroArrendadorOnAction" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: CFCFCF;" text="Registrarse como Arrendador" />
-            <Button fx:id="registrarArrendatario" layoutX="22.0" layoutY="214.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: CFCFCF;" text="Registrarse como Arrendatario" />
+            <Button fx:id="registrarArrendatario" layoutX="22.0" layoutY="214.0" mnemonicParsing="false" onAction="#registroArrendatarioOnAction" prefHeight="33.0" prefWidth="249.0" style="-fx-background-color: CFCFCF;" text="Registrarse como Arrendatario" />
             <Label alignment="CENTER" layoutX="40.0" layoutY="60.0" prefHeight="17.0" prefWidth="213.0" text="Tipo de registro">
                <font>
                   <Font name="Verdana" size="14.0" />

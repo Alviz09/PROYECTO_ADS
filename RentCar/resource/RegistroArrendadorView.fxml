@@ -116,6 +116,7 @@
                </effect>
             </Label>
             <Button fx:id="confirmarRegistroArrendador" layoutX="130.0" layoutY="361.0" mnemonicParsing="false" onAction="#registrarArrendador" text="Confirmar" />
+            <Button fx:id="volver" layoutX="9.0" layoutY="19.0" mnemonicParsing="false" onAction="#volverARegisterView" prefHeight="25.0" prefWidth="30.0" text="&lt;-" />
          </children>
       </AnchorPane>
    </right>
