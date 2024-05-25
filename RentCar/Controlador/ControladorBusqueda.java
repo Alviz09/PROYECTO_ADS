@@ -8,10 +8,7 @@
 //import java.util.stream.Collectors;
 //
 //public class ControladorBusqueda {
-//    private int telefono;//sobra
-//    private String correoElectronico;//sobra
-//    private String tipoUsuario;//sobra
-//    private ArrayList<Oficina> oficinas;
+
 //
 //    public Vehiculo buscarVehiculo(int n ){
 //        Vehiculo encontrado ;

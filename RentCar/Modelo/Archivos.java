@@ -118,6 +118,13 @@ public class Archivos {
         });
         return userById;
     }
+    private static Map<Integer, Oficina> getOfficeById(ArrayList<Oficina> oficinas) {
+        Map<Integer, Oficina> officeById= new HashMap<>();
+        oficinas.forEach(oficina -> {
+            officeById.put(oficina.getId(), oficina);
+        });
+        return officeById;
+    }
 
 
 }

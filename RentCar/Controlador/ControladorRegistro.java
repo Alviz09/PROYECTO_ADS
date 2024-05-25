@@ -5,23 +5,26 @@ import Modelo.Arrendatario;
 import Modelo.Empresa;
 import Modelo.Usuario;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ControladorRegistro {
     @FXML
-    private TextField eMail;
+    private TextField eMail,arrendadorNombreTxtField,arrendadorApellitdoTxtField,arrendadorEdadTxtField,arrendadorDireccionTxtField,arrendadorCelularTxtField, arrendadorMailTxtField,arrendadorTipoDocTxtField,arrendadorIdTxtField;
     @FXML
     private PasswordField password;
     @FXML
-    private Button registrarse,iniciarSesion,salir;
+    private Button registrarse,iniciarSesion,salir, volver,confirmarRegistroArrendador,registarArrendador;
     @FXML
     private Label mensajeInicioDeSesion;
     private Empresa empresa = Empresa.getInstance();
@@ -31,14 +34,33 @@ public class ControladorRegistro {
         stage.close();
     }
 
-    public void registrarUsuario(String tipoUsuario, String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
-        Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
-        empresa.getUsuarios().add(nuevo);
+    public void registrarArrendador() {
+        try {
+            String nombre = arrendadorNombreTxtField.getText().trim();
+            String apellido = arrendadorApellitdoTxtField.getText().trim();
+            int edad = Integer.parseInt(arrendadorEdadTxtField.getText().trim());
+            String direccion = arrendadorDireccionTxtField.getText().trim();
+            long telefono = Long.parseLong(arrendadorCelularTxtField.getText().trim());
+            String correoElectronico = arrendadorMailTxtField.getText().trim();
+            String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();
+            int numeroDelIdentificacion = Integer.parseInt(arrendadorIdTxtField.getText().trim());
+
+            Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
+            empresa.getUsuarios().add(nuevo);
+            mostrarMensaje("incio existoso");
+            // Muestra un mensaje de éxito si se agrega correctamente
+        } catch (NumberFormatException e) {
+            // Maneja errores de formato de número
+            mostrarMensaje("Error en el formato de los datos");
+        } catch (Exception e) {
+            // Maneja otros posibles errores
+            mostrarMensaje("Error en el registro de Arrendador");
+        }
     }
 
     @FXML
     public void registrarUsuario(String tipoUsuario, String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion, boolean licencia, boolean preferencial) {
-        Arrendatario nuevo = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion, licencia, preferencial);
+        Arrendatario nuevo = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion, licencia, preferencial=false);
         empresa.getUsuarios().add(nuevo);
     }
 
@@ -68,15 +90,61 @@ public class ControladorRegistro {
 
     @FXML
     public void validarRegistro() throws Exception{
-        String correoElectronico = eMail.getText().trim();
-        String contraseña = password.getText().trim();
-        int contrasena = Integer.parseInt(contraseña);
-        boolean existe= empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico) && usuario.getNumeroDelIdentificacion() == contrasena);
+        try {
+            String correoElectronico = eMail.getText().trim();
+            String contraseña = password.getText().trim();
+            int contrasena = Integer.parseInt(contraseña);
+            boolean existe = empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico) && usuario.getNumeroDelIdentificacion() == contrasena);
 
-        if(existe==true)
-            mensajeInicioDeSesion.setText("inicio de sesion existoso");
-        else
-            mensajeInicioDeSesion.setText("inicio de sesion fallido, intente otra vez");
+            if (existe == true)
+                mensajeInicioDeSesion.setText("inicio de sesion existoso");
+            else
+                mensajeInicioDeSesion.setText("Usuario o contrasñea no existen, intente otra vez");
+        }catch (NumberFormatException e){
+            mostrarMensaje("Su contraseña es su ID");
+        }
+    }
+    @FXML
+    public void registroOnAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RegisterView.fxml"));
+            Stage stage = (Stage) registrarse.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void registroArrendadorOnAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RegistroArrendadorView.fxml"));
+            Stage stage = (Stage) registarArrendador.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void volverAMainView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MainView.fxml"));
+            Stage stage = (Stage) volver.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarMensaje(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }
+

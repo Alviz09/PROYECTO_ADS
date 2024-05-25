@@ -16,8 +16,8 @@ public class InterfazApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root= FXMLLoader.load(getClass().getResource("../resource/MainView.fxml"));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        //primaryStage.setTitle("porfabor funciona");
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setTitle("RentCar");
         primaryStage.setScene(new Scene(root, 520,400));
         primaryStage.show();
     }
