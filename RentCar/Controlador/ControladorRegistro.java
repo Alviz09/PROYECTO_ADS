@@ -133,17 +133,26 @@ public class ControladorRegistro  {
             String correoElectronico = eMail.getText().trim();
             String contraseña = password.getText().trim();
             int contrasena = Integer.parseInt(contraseña);
-            boolean existe = empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico) && usuario.getNumeroDelIdentificacion() == contrasena);
 
-            if (existe == true)
-                mensajeInicioDeSesion.setText("inicio de sesion existoso");
-            else
-                mensajeInicioDeSesion.setText("Usuario o contrasñea no existen, intente otra vez");
+            // Encuentra el usuario que coincide con el correo electrónico y la contraseña (ID)
+            Usuario usuario = empresa.getUsuarios().stream()
+                    .filter(u -> u.getCorreoElectronico().equals(correoElectronico) && u.getNumeroDelIdentificacion() == contrasena)
+                    .findFirst()
+                    .orElse(null);
+
+            if (usuario != null) {
+                // Si el usuario existe, llama al método setUsuarioEnElSistema
+                empresa.setUsuarioEnElSistema(usuario);
+                mensajeInicioDeSesion.setText("Inicio de sesión exitoso");
+
+                // Aquí puedes agregar el código para cambiar a la vista principal si es necesario
+            } else {
+                mensajeInicioDeSesion.setText("Usuario o contraseña no existen, intente otra vez");
+            }
         } catch (NumberFormatException e) {
-            mostrarMensaje("intete ingresar su contraseña denuevo, su contraseña es su ID");
-        }
-        catch (Exception e ){
-            mostrarMensaje("intete ingresar su contraseña denuevo, su contraseña es su ID");
+            mostrarMensaje("Intente ingresar su contraseña de nuevo, su contraseña es su ID");
+        } catch (Exception e) {
+            mostrarMensaje("Intente ingresar su contraseña de nuevo, su contraseña es su ID");
         }
     }
 

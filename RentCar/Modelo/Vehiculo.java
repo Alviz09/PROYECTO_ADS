@@ -21,6 +21,8 @@ public class Vehiculo {
    // private String autoManual;
     private LocalDate fechaVisita;
     private boolean disponibilidad=true;
+    private int leaseDays=0;
+    private int precioAdicional=0;
 
 //    public Vehiculo(int idTarjetaDePropiedad, int cantidadSillas, int numPuertas, float capacidadLitrosMotor, String color, String placa, String marca, String modelo, float precioPorDia, String tipoVehiculo, String ciudad, String pais, String categoria, boolean kitCarretera, Date fechaVisita) {
 //        this.idTarjetaDePropiedad = idTarjetaDePropiedad;
@@ -55,6 +57,13 @@ public class Vehiculo {
         this.categoria = categoria;
         this.kitCarretera = kitCarretera;
     }
+    public int getLeaseDays(){
+        return leaseDays;
+    }
+    public void increaseLeaseDays(){
+        leaseDays++;
+    }
+    public int getPrecioAdicional(){return precioAdicional;}
 
     public int getIdTarjetaDePropiedad() {
         return idTarjetaDePropiedad;
