@@ -20,22 +20,22 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ControladorBusqueda {
 
-    public Button mostrarOficinas, mostrarVehiculos;
-    public Button pagar;
+
+    public TextField txtMostradorFinViaje;
+    public Button volverBuscador;
+    public TextField ingresoVehiculo;
+    public TextField ingresoOficina;
+    public Button mostrarVehiculosOficina;
+    public Button mostrarOficinas;
     public Button buscarVehiculo;
+    public Button pagar;
     public Button finViaje;
     public Button adicionarTiempo;
+    public Button cerrarSesionArrendador;
+    public TextField txtMostrador1;
     private Empresa empresa = Empresa.getInstance();
 
-    @FXML
-    private TextField ingresoVehiculo,ingresoOficina;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private Button registrarse,iniciarSesion,salir, volver,confirmarRegistroArrendador,registarArrendador;
-    @FXML
-    private Label mensajeInicioDeSesion;
-    private Empresa empresa = Empresa.getInstance();
+    //private Empresa empresa = Empresa.getInstance();
 
 
     public void PagarViaje(ActionEvent actionEvent) {
@@ -56,6 +56,27 @@ public class ControladorBusqueda {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void mostrarPantalla(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void mostrarOficinas(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void datoIdOficina(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void datoIdVehiculo(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void volverMenuArrendador(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void ejecutarBuscadorArrendatario(javafx.event.ActionEvent actionEvent) {
     }
 
     public void PagarViaje(javafx.event.ActionEvent actionEvent) {

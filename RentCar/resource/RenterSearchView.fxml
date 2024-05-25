@@ -19,16 +19,16 @@
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextField fx:id="txtMostrador" layoutX="73.0" layoutY="29.0" prefHeight="408.0" prefWidth="246.0" />
+            <TextField fx:id="txtMostrador1" layoutX="73.0" layoutY="29.0" onAction="#mostrarPantalla" prefHeight="408.0" prefWidth="246.0" />
             </children>
         </AnchorPane>
     </left>
    <right>
         <AnchorPane prefHeight="484.0" prefWidth="469.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="mostrarOficinas" layoutX="69.0" layoutY="86.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="320.0" style="-fx-background-color: CFCFCF;" text="Mostrar oficinas" />
-                <Button fx:id="mostrarVehiculos" layoutX="124.0" layoutY="191.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos de oficina" />
-                <Label alignment="CENTER" layoutX="91.0" layoutY="20.0" prefHeight="18.0" prefWidth="276.0" text="Buscador para el mejor cliente">
+                <Button fx:id="mostrarOficinas" layoutX="69.0" layoutY="86.0" mnemonicParsing="false" onAction="#mostrarOficinas" prefHeight="33.0" prefWidth="320.0" style="-fx-background-color: CFCFCF;" text="Mostrar oficinas" />
+                <Button fx:id="mostrarVehiculosOficina" layoutX="124.0" layoutY="191.0" mnemonicParsing="false" onAction="#mostrarVehiculos" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos de oficina" />
+                <Label alignment="CENTER" layoutX="91.0" layoutY="35.0" prefHeight="18.0" prefWidth="276.0" text="Buscador para el mejor cliente">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
@@ -37,10 +37,10 @@
                     </effect>
                 </Label>
             <Label layoutX="76.0" layoutY="143.0" prefHeight="17.0" prefWidth="113.0" text="Ingresa id de oficina" />
-            <TextField fx:id="ingresoOficina" layoutX="218.0" layoutY="139.0" />
+            <TextField fx:id="ingresoOficina" layoutX="218.0" layoutY="139.0" onAction="#datoIdOficina" />
             <Label layoutX="76.0" layoutY="255.0" prefHeight="17.0" prefWidth="125.0" text="ingresa id de vehiculo" />
-            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="251.0" />
-            <Button fx:id="volverBuscadorVehiculo" layoutX="124.0" layoutY="329.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
+            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="251.0" onAction="#datoIdVehiculo" />
+            <Button fx:id="volverBuscador" layoutX="124.0" layoutY="313.0" mnemonicParsing="false" onAction="#volverMenuArrendador" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
             </children>
         </AnchorPane>
    </right>
