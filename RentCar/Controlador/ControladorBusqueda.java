@@ -35,21 +35,12 @@ public class ControladorBusqueda {
     public TextField txtMostrador1;
     private Empresa empresa = Empresa.getInstance();
 
-    //private Empresa empresa = Empresa.getInstance();
 
 
-    public void PagarViaje(ActionEvent actionEvent) {
-    }
-
-    public void finViaje(ActionEvent actionEvent) {
-    }
-
-    public void AdicionarTiempo(ActionEvent actionEvent) {
-    }
 
     public void ejecutarBuscadorArrendatario(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RegistroArrendadorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RenterSearchView.fxml"));
             Stage stage = (Stage) buscarVehiculo.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
@@ -86,6 +77,10 @@ public class ControladorBusqueda {
     }
 
     public void AdicionarTiempo(javafx.event.ActionEvent actionEvent) {
+    }
+
+    public void cerrarSesion(javafx.event.ActionEvent actionEvent) {
+
     }
 }
 /*

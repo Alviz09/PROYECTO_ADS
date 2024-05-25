@@ -36,7 +36,7 @@
             <Button fx:id="pagar" layoutX="116.0" layoutY="248.0" mnemonicParsing="false" onAction="#PagarViaje" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Pagar viaje" />
             <Button fx:id="finViaje" layoutX="116.0" layoutY="200.0" mnemonicParsing="false" onAction="#finViaje" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Darle fin al viaje" />
             <Button fx:id="adicionarTiempo" layoutX="116.0" layoutY="100.0" mnemonicParsing="false" onAction="#AdicionarTiempo" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Adicionar tiempo de uso" />
-            <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="301.0" mnemonicParsing="false" onAction="#ejecutarBuscadorArrendatario" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
+            <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="301.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
             </children>
         </AnchorPane>
     </center>
