@@ -16,7 +16,9 @@ public class Empresa {
 
         return EMPRESA;
     }
-
+    public void guardarArchivo() {
+        Archivos.escribirArchivos(usuarios);
+    }
     public  ArrayList<Usuario> getUsuarios(){
         return usuarios;
     }
