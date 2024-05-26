@@ -7,7 +7,7 @@ public class Arrendatario extends Usuario{
     private boolean preferencial;
     private boolean contrato;
     private int leaseNumber=0;
-    private ArrayList<Contrato> contratosVehiculos;
+    private ArrayList<Contrato> contratosVehiculos = new ArrayList<Contrato>() ;
 
 
 

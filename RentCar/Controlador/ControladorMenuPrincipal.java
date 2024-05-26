@@ -51,6 +51,7 @@ public class ControladorMenuPrincipal {
             if (existe == true){
                 mensajeInicioDeSesion.setText("inicio de sesion existoso");
                 Usuario user = empresa.getUsuarios().stream().filter(usuario -> usuario.getCorreoElectronico().equals(correoElectronico)).limit(1).findFirst().orElse(null);
+                empresa.setUsuarioEnElSistema(user);
                 abrirBusqueda(user);
             }
 
@@ -68,7 +69,7 @@ public class ControladorMenuPrincipal {
         alert.showAndWait();
     }
     private void abrirBusqueda(Usuario user){
-        if(user instanceof Arrendador){
+        if(user instanceof Arrendatario){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
                 Stage stage = (Stage) registrarse.getScene().getWindow();

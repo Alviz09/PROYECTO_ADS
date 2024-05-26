@@ -64,7 +64,7 @@ public class ControladorBusqueda {
         if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))){
             Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId()  == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
             for(Vehiculo v: ofi.getVehiculos()){
-                txtMostrador1.appendText("Precio por dia: :"+v.getPrecioPorDia()+"\tCategoria: "+v.getCategoria()+"\nPlaca: "+v.getPlaca()+"\tModelo: "+v.getModelo()+"\nCantidad sillas: "+v.getCantidadSillas()+"\tMarca: "+v.getMarca()+"\nPais: "+v.getPais()+"\tCiudad: "+v.getCiudad());
+                txtMostrador1.appendText("\nPrecio por dia: :"+v.getPrecioPorDia()+"\tCategoria: "+v.getCategoria()+"\nPlaca: "+v.getPlaca()+"\tModelo: "+v.getModelo()+"\nCantidad sillas: "+v.getCantidadSillas()+"\tMarca: "+v.getMarca()+"\nPais: "+v.getPais()+"\tCiudad: "+v.getCiudad()+"\n");
             }
         }
     }
@@ -143,31 +143,36 @@ public class ControladorBusqueda {
             String idOficina = ingresoOficina.getText().trim();
             String placaVehivulo = ingresoVehiculo.getText().trim();
             if (empresa.getOficinas().stream().anyMatch(of -> of.getId() == Integer.parseInt(idOficina))) {
+
                 Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId() == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
                 if (ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))) {
-                    float precio=0;
+                    float precio = 0;
                     Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
-                    if (((getLlantas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getSeguroTotal.isSelected())) ||((getVentanas.isSelected()) && (getLlantas.isSelected()))) {
+                    if (((getLlantas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getLlantas.isSelected()))) {
                         throw new ExcepcionLogica();
                     } else if (getLlantas.isSelected()) {
-                        precio+=300000;
+                        precio += 300000;
                     } else if (getVentanas.isSelected()) {
-                        precio+=100000;
-                    } else if(getSeguroTotal.isSelected()) {
-                        precio+=500000;
+                        precio += 100000;
+                    } else if (getSeguroTotal.isSelected()) {
+                        precio += 500000;
                     }
-                    precio+= 100000*Integer.parseInt(sillaBebe.getText().trim());
-                    precio+= 80000*Integer.parseInt(maletero.getText().trim());
-                    precio+= 50000*Integer.parseInt(conductorAdicional.getText().trim());
-                    precio+= 30000*Integer.parseInt(disGPS.getText().trim());
+                    precio += 100000 * Integer.parseInt(sillaBebe.getText().trim());
+                    precio += 80000 * Integer.parseInt(maletero.getText().trim());
+                    precio += 50000 * Integer.parseInt(conductorAdicional.getText().trim());
+                    precio += 30000 * Integer.parseInt(disGPS.getText().trim());
                     Date todayDate = new Date();
                     //se crea contrato
-                    Contrato contrato = new Contrato(ofi.getId(), todayDate,sumarDiasAFecha(todayDate, Integer.parseInt(diasRequeridos.getText().trim())), v.getPlaca(), empresa.getUsuarioEnElSistema().getCorreoElectronico());
+                    Contrato contrato = new Contrato(ofi.getId(), todayDate, sumarDiasAFecha(todayDate, Integer.parseInt(diasRequeridos.getText().trim())), v.getPlaca(), empresa.getUsuarioEnElSistema().getCorreoElectronico());
                     v.setDisponibilidad(false);
                     Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
                     arrendatario.getContratosVehiculos().add(contrato);
 
+                }else{
+                    mostrarMensaje("esa placa no existe");
                 }
+            }else{
+                mostrarMensaje("esa oficina no existe");
             }
         } catch (NumberFormatException e) {
             mostrarMensaje("no se ingresaron los valores numericos bien");
@@ -177,10 +182,15 @@ public class ControladorBusqueda {
     }
 
     public void mostrarVehiculosPropiedad(ActionEvent actionEvent) {
-        for (Vehiculo v : empresa.getUsuarioEnElSistema().getVehiculos()) {
-            txtMostrador.appendText("Precio por dia: :" + v.getPrecioPorDia() + "\tCategoria: " + v.getCategoria() + "\nPlaca: " + v.getPlaca() + "\tModelo: " + v.getModelo() + "\nCantidad sillas: " + v.getCantidadSillas() + "\tMarca: " + v.getMarca() + "\nPais: " + v.getPais() + "\tCiudad: " + v.getCiudad());
+        try {
+            for (Vehiculo v : empresa.getUsuarioEnElSistema().getVehiculos()) {
+                txtMostrador.appendText("Precio por dia: :" + v.getPrecioPorDia() + "\tCategoria: " + v.getCategoria() + "\nPlaca: " + v.getPlaca() + "\tModelo: " + v.getModelo() + "\nCantidad sillas: " + v.getCantidadSillas() + "\tMarca: " + v.getMarca() + "\nPais: " + v.getPais() + "\tCiudad: " + v.getCiudad());
 
+            }
+        }catch (NullPointerException e){
+            mostrarMensaje("no tiene vehiculos en uso este usuario");
         }
+
     }
 
     public  void agregarTiempo(ActionEvent actionEvent) {
