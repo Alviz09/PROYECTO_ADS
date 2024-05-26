@@ -35,7 +35,6 @@ public class ControladorBusqueda {
     private Button registrarse,iniciarSesion,salir, volver,confirmarRegistroArrendador,registarArrendador;
     @FXML
     private Label mensajeInicioDeSesion;
-    private Empresa empresa = Empresa.getInstance();
 
 
     public void PagarViaje(ActionEvent actionEvent) {
