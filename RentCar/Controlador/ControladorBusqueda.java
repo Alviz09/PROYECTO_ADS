@@ -54,7 +54,7 @@ public class ControladorBusqueda {
         }
     }
 
-    public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {\
+    public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {
         String idOficina = ingresoOficina.getText().trim();
         if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))){
             Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId()  == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
