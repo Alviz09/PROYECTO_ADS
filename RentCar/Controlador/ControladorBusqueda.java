@@ -1,5 +1,6 @@
 package Controlador;
 
+import Excepciones.ExcepcionDisponibilidad;
 import Excepciones.ExcepcionLogica;
 import Modelo.*;
 import javafx.event.ActionEvent;
@@ -146,8 +147,12 @@ public class ControladorBusqueda {
 
                 Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId() == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
                 if (ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))) {
+
                     float precio = 0;
                     Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
+                    if(!(v.getdisponibilidad())){
+                        throw new ExcepcionDisponibilidad();
+                    }
                     if (((getLlantas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getLlantas.isSelected()))) {
                         throw new ExcepcionLogica();
                     } else if (getLlantas.isSelected()) {
@@ -168,6 +173,7 @@ public class ControladorBusqueda {
                     Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
                     arrendatario.getContratosVehiculos().add(contrato);
 
+                    mostrarMensaje("se creo el cotrato con la informacion, paguelo cuando puedda");
                 }else{
                     mostrarMensaje("esa placa no existe");
                 }
@@ -176,6 +182,8 @@ public class ControladorBusqueda {
             }
         } catch (NumberFormatException e) {
             mostrarMensaje("no se ingresaron los valores numericos bien");
+        } catch (ExcepcionDisponibilidad e) {
+            mostrarMensaje(" no esta disponible el vehiculo");
         } catch (ExcepcionLogica e) {
             mostrarMensaje("solo puede tener un seguro");
         }
