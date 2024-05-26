@@ -28,9 +28,18 @@ public class ControladorBusqueda {
     public Button finViaje;
     public Button adicionarTiempo;
     public Button cerrarSesionArrendador;
-    public TextArea txtMostrador1;
+    public TextField txtMostrador1;
     public TextArea txtPlacaVehiculo;
     public Button mostrarVehiculosEnPropiedad;
+    public Button volver;
+    public CheckBox getVentanas;
+    public CheckBox getLlantas;
+    public CheckBox getSeguroTotal;
+    public TextField sillaBebe;
+    public TextField disGPS;
+    public TextField conductorAdicional;
+    public Button registrarUsuario;
+    public TextField maletero;
     private Empresa empresa = Empresa.getInstance();
 
 
@@ -58,19 +67,48 @@ public class ControladorBusqueda {
     }
 
     public void volverMenuArrendador(javafx.event.ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
+            Stage stage = (Stage) cerrarSesionArrendador.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void ejecutarBuscadorArrendatario(javafx.event.ActionEvent actionEvent) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RenterSearchView.fxml"));
+            Stage stage = (Stage) buscarVehiculo.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void PagarViaje(javafx.event.ActionEvent actionEvent) {
-    }
 
     public void finViaje(javafx.event.ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/EndTripView.fxml"));
+            Stage stage = (Stage) finViaje.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void AdicionarTiempo(javafx.event.ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MoreTimeView.fxml"));
+            Stage stage = (Stage) adicionarTiempo.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cerrarSesion(javafx.event.ActionEvent actionEvent) {
@@ -91,5 +129,15 @@ public class ControladorBusqueda {
     }
 
     public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
+    }
+    public void volverMenuPrincipal(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
+            Stage stage = (Stage) volver.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
