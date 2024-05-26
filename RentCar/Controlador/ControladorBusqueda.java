@@ -69,7 +69,7 @@ public class ControladorBusqueda {
     public void volverMenuArrendador(javafx.event.ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
-            Stage stage = (Stage) cerrarSesionArrendador.getScene().getWindow();
+            Stage stage = (Stage) volver.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
         } catch (IOException e) {
@@ -129,15 +129,5 @@ public class ControladorBusqueda {
     }
 
     public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
-    }
-    public void volverMenuPrincipal(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
-            Stage stage = (Stage) volver.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
