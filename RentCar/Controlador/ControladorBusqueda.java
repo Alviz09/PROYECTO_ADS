@@ -19,7 +19,6 @@ public class ControladorBusqueda {
 
 
     public TextArea txtMostradorFinViaje;
-    public Button volverBuscador;
     public TextField ingresoVehiculo;
     public TextField ingresoOficina;
     public Button mostrarVehiculosOficina;
@@ -31,7 +30,6 @@ public class ControladorBusqueda {
     public Button cerrarSesionArrendador;
     public TextArea txtMostrador1;
     public TextArea txtPlacaVehiculo;
-    public Button volverFinViaje;
     public Button mostrarVehiculosEnPropiedad;
     private Empresa empresa = Empresa.getInstance();
 
@@ -95,35 +93,3 @@ public class ControladorBusqueda {
     public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
     }
 }
-/*
-    public Vehiculo buscarVehiculo(int n ){
-        Vehiculo encontrado ;
-        return encontrado;
-    }
-    public Usuario buscarUsuario(String correoElectronico, String tipoUsuario){
-        Usuario usuarioEncontrado;
-        return usuarioEncontrado;
-    }
-    public Oficina buscarOficina(int id ){
-        Oficina oficinaEncontrada;
-        return oficinaEncontrada;
-    }
-    public boolean validarUsuario(){
-        boolean preferencial=false;
-        return preferencial;
-    }
-    public Date organizarVisitaCarro(){
-        Date fehcaVIsita;
-        return fehcaVIsita;
-    }
-
-
-    public void añadirServicioAdicional(){
-
-    }
-    public Date guardarInformacion(){
-
-        Date infoGuardada;
-        return infoGuardada;
-    }
- */
