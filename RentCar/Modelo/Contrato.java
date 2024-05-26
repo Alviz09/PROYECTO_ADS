@@ -9,7 +9,8 @@ public class Contrato {
     private Date fechaDevolucion;
     private int horaEntrega;
     private int horaDevolucion;
-    private int nCarro;
+    private String placaCarro;
+    private String emailUser;
 
     public void Contrarto(int nCarro, int nOficina){
     }
@@ -37,8 +38,12 @@ public class Contrato {
         this.horaDevolucion = horaDevolucion;
     }
 
-    public void setNCarro(int nCarro) {
-        this.nCarro = nCarro;
+    public void setPlacaCarro(String placaCarro){
+        this.placaCarro = placaCarro;
+    }
+
+    public void setEmailUser(String emailUser){
+        this.emailUser = emailUser;
     }
 
     // Getters
@@ -66,8 +71,12 @@ public class Contrato {
         return horaDevolucion;
     }
 
-    public int getNCarro() {
-        return nCarro;
+    public String getPlacaCarro(){
+        return placaCarro;
+    }
+
+    public String getEmailUser(){
+        return emailUser;
     }
 
 }

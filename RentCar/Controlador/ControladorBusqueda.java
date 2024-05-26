@@ -39,14 +39,14 @@ public class ControladorBusqueda {
     public TextField conductorAdicional;
     public Button arrendarVehiculo;
     public TextField maletero;
+    public TextArea txtMostrador;
+    public Button agregarTiempo;
+    public TextField ingresoPlaca;
     private Empresa empresa = Empresa.getInstance();
 
 
 
 
-
-    public void mostrarPantalla(javafx.event.ActionEvent actionEvent) {
-    }
 
     public void mostrarOficinas(javafx.event.ActionEvent actionEvent) {
         for(Oficina s : empresa.getOficinas()){
@@ -67,8 +67,6 @@ public class ControladorBusqueda {
     public void datoIdOficina(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void datoIdVehiculo(javafx.event.ActionEvent actionEvent) {
-    }
 
     public void volverMenuArrendador(javafx.event.ActionEvent actionEvent) {
         try {
@@ -143,8 +141,17 @@ public class ControladorBusqueda {
             if(ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))){
                 Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
 
-
             }
         }
+    }
+
+    public void mostrarVehiculosPropiedad(ActionEvent actionEvent) {
+        for (Vehiculo v : empresa.getUsuarioEnElSistema().getVehiculos()) {
+            txtMostrador.appendText("Precio por dia: :" + v.getPrecioPorDia() + "\tCategoria: " + v.getCategoria() + "\nPlaca: " + v.getPlaca() + "\tModelo: " + v.getModelo() + "\nCantidad sillas: " + v.getCantidadSillas() + "\tMarca: " + v.getMarca() + "\nPais: " + v.getPais() + "\tCiudad: " + v.getCiudad());
+
+        }
+    }
+
+    public  void agregarTiempo(ActionEvent actionEvent) {
     }
 }
