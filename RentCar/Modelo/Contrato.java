@@ -3,6 +3,7 @@ package Modelo;
 import java.util.Date;
 
 public class Contrato {
+    private float valorArriendo;
     private int oficinaRecogida;
     private int oficinaDevolucion;
     private Date fechaEntrega; //el fecha tambien esta la hora
@@ -69,4 +70,11 @@ public class Contrato {
         return emailUser;
     }
 
+    public float getValorArriendo() {
+        return valorArriendo;
+    }
+
+    public void setValorArriendo(float valorArriendo) {
+        this.valorArriendo = valorArriendo;
+    }
 }

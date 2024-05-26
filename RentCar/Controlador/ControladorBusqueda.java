@@ -48,6 +48,7 @@ public class ControladorBusqueda {
     public Button agregarTiempo;
     public TextField ingresoPlaca;
     public TextField diasRequeridos;
+    public TextField diasAgregar;
     private Empresa empresa = Empresa.getInstance();
 
 
@@ -170,6 +171,7 @@ public class ControladorBusqueda {
                     //se crea contrato
                     Contrato contrato = new Contrato(ofi.getId(), todayDate, sumarDiasAFecha(todayDate, Integer.parseInt(diasRequeridos.getText().trim())), v.getPlaca(), empresa.getUsuarioEnElSistema().getCorreoElectronico());
                     v.setDisponibilidad(false);
+                    contrato.setValorArriendo(precio);
                     Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
                     arrendatario.getContratosVehiculos().add(contrato);
 
@@ -202,6 +204,26 @@ public class ControladorBusqueda {
     }
 
     public  void agregarTiempo(ActionEvent actionEvent) {
+        try{
+            String placa = ingresoPlaca.getText().trim();
+            String dias = diasAgregar.getText().trim();
+            // no se hace instance of porque se hizo cuando se ingreso a la vista
+            if (empresa.getUsuarioEnElSistema().getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placa))){
+                Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
+
+                Contrato contrato = arrendatario.getContratosVehiculos().stream().filter(c -> c.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null);
+                Vehiculo vehiculo = arrendatario.getVehiculos().stream().filter(v -> v.getPlaca().equals(placa)).limit(1).findFirst().orElse(null);
+                contrato.setFechaDevolucion(sumarDiasAFecha(contrato.getFechaDevolucion(), Integer.parseInt(dias)));
+                contrato.setValorArriendo((contrato.getValorArriendo())+(vehiculo.getPrecioPorDia()*Integer.parseInt(dias)));
+                mostrarMensaje("se realizo la amplitud de tiempo");
+
+            }
+
+
+        }catch (NumberFormatException e){
+            mostrarMensaje("no ingreso en numeros la fecha");
+        }
+
     }
     private void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
