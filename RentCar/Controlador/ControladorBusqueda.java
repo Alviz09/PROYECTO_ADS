@@ -12,8 +12,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ControladorBusqueda {
@@ -43,6 +46,7 @@ public class ControladorBusqueda {
     public TextArea txtMostrador;
     public Button agregarTiempo;
     public TextField ingresoPlaca;
+    public TextField diasRequeridos;
     private Empresa empresa = Empresa.getInstance();
 
 
@@ -156,8 +160,12 @@ public class ControladorBusqueda {
                     precio+= 80000*Integer.parseInt(maletero.getText().trim());
                     precio+= 50000*Integer.parseInt(conductorAdicional.getText().trim());
                     precio+= 30000*Integer.parseInt(disGPS.getText().trim());
-                    Contrato contrato = new Contrato();
-
+                    Date todayDate = new Date();
+                    //se crea contrato
+                    Contrato contrato = new Contrato(ofi.getId(), todayDate,sumarDiasAFecha(todayDate, Integer.parseInt(diasRequeridos.getText().trim())), v.getPlaca(), empresa.getUsuarioEnElSistema().getCorreoElectronico());
+                    v.setDisponibilidad(false);
+                    Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
+                    arrendatario.getContratosVehiculos().add(contrato);
 
                 }
             }
@@ -183,5 +191,12 @@ public class ControladorBusqueda {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    public Date sumarDiasAFecha(Date fecha, int dias){
+        if (dias==0) return fecha;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_YEAR, dias);
+        return calendar.getTime();
     }
 }

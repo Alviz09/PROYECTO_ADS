@@ -5,15 +5,20 @@ import java.util.Date;
 public class Contrato {
     private int oficinaRecogida;
     private int oficinaDevolucion;
-    private Date fechaEntrega;
+    private Date fechaEntrega; //el fecha tambien esta la hora
     private Date fechaDevolucion;
-    private int horaEntrega;
-    private int horaDevolucion;
     private String placaCarro;
     private String emailUser;
 
-    public void Contrarto(int oficinaRecogida, Date fechaEntrega, Date fechaDevolucion, int horaEntrega,int horaDevolucion,String placaCarro,String emailUser){
+    public Contrato(int id, Date todayDate, Date FinishDate, String placa, String correoElectronico) {
+        this.oficinaRecogida = id;
+        this.oficinaDevolucion = id; //se pone la misma de recogida por defecto cuando se busca el carro
+        this.fechaEntrega = todayDate;
+        this.fechaDevolucion = FinishDate;
+        this.placaCarro = placa;
+        this.emailUser = correoElectronico;
     }
+
     public void setOficinaRecogida(int oficinaRecogida) {
         this.oficinaRecogida = oficinaRecogida;
     }
@@ -28,14 +33,6 @@ public class Contrato {
 
     public void setFechaDevolucion(Date fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
-    }
-
-    public void setHoraEntrega(int horaEntrega) {
-        this.horaEntrega = horaEntrega;
-    }
-
-    public void setHoraDevolucion(int horaDevolucion) {
-        this.horaDevolucion = horaDevolucion;
     }
 
     public void setPlacaCarro(String placaCarro){
@@ -63,13 +60,6 @@ public class Contrato {
         return fechaDevolucion;
     }
 
-    public int getHoraEntrega() {
-        return horaEntrega;
-    }
-
-    public int getHoraDevolucion() {
-        return horaDevolucion;
-    }
 
     public String getPlacaCarro(){
         return placaCarro;

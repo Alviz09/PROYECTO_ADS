@@ -29,7 +29,7 @@
         <AnchorPane prefHeight="484.0" prefWidth="469.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="mostrarOficinas" layoutX="69.0" layoutY="68.0" mnemonicParsing="false" onAction="#mostrarOficinas" prefHeight="33.0" prefWidth="320.0" style="-fx-background-color: CFCFCF;" text="Mostrar oficinas" />
-                <Button fx:id="mostrarVehiculosOficina" layoutX="248.0" layoutY="121.0" mnemonicParsing="false" onAction="#mostrarVehiculos" prefHeight="22.0" prefWidth="174.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos de oficina" />
+                <Button fx:id="mostrarVehiculosOficina" layoutX="248.0" layoutY="118.0" mnemonicParsing="false" onAction="#mostrarVehiculos" prefHeight="22.0" prefWidth="174.0" style="-fx-background-color: CFCFCF;" text="Mostrar vehiculos de oficina" />
                 <Label alignment="CENTER" layoutX="91.0" layoutY="35.0" prefHeight="18.0" prefWidth="276.0" text="Buscador para el mejor cliente">
                     <font>
                         <Font name="Verdana" size="14.0" />
@@ -40,22 +40,24 @@
                 </Label>
             <Label layoutX="13.0" layoutY="125.0" prefHeight="17.0" prefWidth="113.0" text="Ingresa id de oficina" />
             <TextField fx:id="ingresoOficina" layoutX="124.0" layoutY="121.0" onAction="#datoIdOficina" prefHeight="25.0" prefWidth="113.0" />
-            <Label layoutX="91.0" layoutY="173.0" prefHeight="17.0" prefWidth="125.0" text="ingresa id de vehiculo" />
-            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="169.0" />
+            <Label layoutX="91.0" layoutY="157.0" prefHeight="17.0" prefWidth="125.0" text="ingresa id de vehiculo" />
+            <TextField fx:id="ingresoVehiculo" layoutX="216.0" layoutY="151.0" />
             <Button fx:id="volver" layoutX="136.0" layoutY="398.0" mnemonicParsing="false" onAction="#volverMenuArrendador" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
             <CheckBox fx:id="getVentanas" layoutX="140.0" layoutY="217.0" mnemonicParsing="false" text="Ventanas" />
             <CheckBox fx:id="getLlantas" layoutX="223.0" layoutY="217.0" mnemonicParsing="false" text="Llantas" />
             <CheckBox fx:id="getSeguroTotal" layoutX="299.0" layoutY="217.0" mnemonicParsing="false" text="total" />
             <Label layoutX="40.0" layoutY="217.0" prefHeight="17.0" prefWidth="87.0" text="tipo de seguro" />
-            <TextField fx:id="sillaBebe" layoutX="32.0" layoutY="253.0" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="disGPS" layoutX="233.0" layoutY="288.0" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="conductorAdicional" layoutX="233.0" layoutY="254.0" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="maletero" layoutX="33.0" layoutY="288.0" prefHeight="25.0" prefWidth="21.0" text="0" />
+            <TextField fx:id="sillaBebe" layoutX="32.0" layoutY="268.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="disGPS" layoutX="233.0" layoutY="303.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="conductorAdicional" layoutX="233.0" layoutY="269.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="maletero" layoutX="33.0" layoutY="303.0" prefHeight="25.0" prefWidth="21.0" text="0" />
             <Button fx:id="arrendarVehiculo" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" onAction="#arrendar" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Arrendar carro" />
-            <Label layoutX="58.0" layoutY="292.0" prefHeight="0.0" prefWidth="125.0" text="maletero (80000)" />
-            <Label layoutX="58.0" layoutY="257.0" prefHeight="0.0" prefWidth="125.0" text="silla bebe (1000000)" />
-            <Label layoutX="259.0" layoutY="257.0" prefHeight="17.0" prefWidth="155.0" text="conductor adicional (50000)" />
-            <Label layoutX="259.0" layoutY="292.0" prefHeight="0.0" prefWidth="125.0" text="dispositivo GPS (30000)" />
+            <Label layoutX="58.0" layoutY="307.0" prefHeight="0.0" prefWidth="125.0" text="maletero (80000)" />
+            <Label layoutX="58.0" layoutY="272.0" prefHeight="0.0" prefWidth="125.0" text="silla bebe (1000000)" />
+            <Label layoutX="259.0" layoutY="272.0" prefHeight="17.0" prefWidth="155.0" text="conductor adicional (50000)" />
+            <Label layoutX="259.0" layoutY="307.0" prefHeight="0.0" prefWidth="125.0" text="dispositivo GPS (30000)" />
+            <Label layoutX="111.0" layoutY="183.0" prefHeight="17.0" prefWidth="105.0" text="dias requeridos" />
+            <TextField fx:id="diasRequeridos" layoutX="216.0" layoutY="179.0" />
             </children>
         </AnchorPane>
    </right>
