@@ -12,7 +12,7 @@ public class Contrato {
     private String placaCarro;
     private String emailUser;
 
-    public void Contrarto(int nCarro, int nOficina){
+    public void Contrarto(int oficinaRecogida, Date fechaEntrega, Date fechaDevolucion, int horaEntrega,int horaDevolucion,String placaCarro,String emailUser){
     }
     public void setOficinaRecogida(int oficinaRecogida) {
         this.oficinaRecogida = oficinaRecogida;

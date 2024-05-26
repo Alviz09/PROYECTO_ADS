@@ -1,5 +1,6 @@
 package Controlador;
 
+import Excepciones.ExcepcionLogica;
 import Modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -134,14 +135,36 @@ public class ControladorBusqueda {
     }
 
     public void arrendar(ActionEvent actionEvent) {
-        String idOficina = ingresoOficina.getText().trim();
-        String placaVehivulo =  ingresoVehiculo.getText().trim();
-        if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))) {
-            Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId() == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
-            if(ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))){
-                Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
+        try {
+            String idOficina = ingresoOficina.getText().trim();
+            String placaVehivulo = ingresoVehiculo.getText().trim();
+            if (empresa.getOficinas().stream().anyMatch(of -> of.getId() == Integer.parseInt(idOficina))) {
+                Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId() == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
+                if (ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))) {
+                    float precio=0;
+                    Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
+                    if (((getLlantas.isSelected()) && (getSeguroTotal.isSelected())) || ((getVentanas.isSelected()) && (getSeguroTotal.isSelected())) ||((getVentanas.isSelected()) && (getLlantas.isSelected()))) {
+                        throw new ExcepcionLogica();
+                    } else if (getLlantas.isSelected()) {
+                        precio+=300000;
+                    } else if (getVentanas.isSelected()) {
+                        precio+=100000;
+                    } else if(getSeguroTotal.isSelected()) {
+                        precio+=500000;
+                    }
+                    precio+= 100000*Integer.parseInt(sillaBebe.getText().trim());
+                    precio+= 80000*Integer.parseInt(maletero.getText().trim());
+                    precio+= 50000*Integer.parseInt(conductorAdicional.getText().trim());
+                    precio+= 30000*Integer.parseInt(disGPS.getText().trim());
+                    Contrato contrato = new Contrato();
 
+
+                }
             }
+        } catch (NumberFormatException e) {
+            mostrarMensaje("no se ingresaron los valores numericos bien");
+        } catch (ExcepcionLogica e) {
+            mostrarMensaje("solo puede tener un seguro");
         }
     }
 
@@ -153,5 +176,12 @@ public class ControladorBusqueda {
     }
 
     public  void agregarTiempo(ActionEvent actionEvent) {
+    }
+    private void mostrarMensaje(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
