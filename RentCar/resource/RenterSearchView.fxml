@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
@@ -20,7 +21,7 @@
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextField fx:id="txtMostrador1" layoutX="73.0" layoutY="29.0" onAction="#mostrarPantalla" prefHeight="408.0" prefWidth="246.0" />
+            <TextArea fx:id="txtMostrador1" layoutX="58.0" layoutY="44.0" prefHeight="372.0" prefWidth="263.0" />
             </children>
         </AnchorPane>
     </left>
@@ -40,17 +41,17 @@
             <Label layoutX="13.0" layoutY="125.0" prefHeight="17.0" prefWidth="113.0" text="Ingresa id de oficina" />
             <TextField fx:id="ingresoOficina" layoutX="124.0" layoutY="121.0" onAction="#datoIdOficina" prefHeight="25.0" prefWidth="113.0" />
             <Label layoutX="91.0" layoutY="173.0" prefHeight="17.0" prefWidth="125.0" text="ingresa id de vehiculo" />
-            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="169.0" onAction="#datoIdVehiculo" />
+            <TextField fx:id="ingresoVehiculo" layoutX="221.0" layoutY="169.0" />
             <Button fx:id="volver" layoutX="136.0" layoutY="398.0" mnemonicParsing="false" onAction="#volverMenuArrendador" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="volver" />
             <CheckBox fx:id="getVentanas" layoutX="140.0" layoutY="217.0" mnemonicParsing="false" text="Ventanas" />
             <CheckBox fx:id="getLlantas" layoutX="223.0" layoutY="217.0" mnemonicParsing="false" text="Llantas" />
             <CheckBox fx:id="getSeguroTotal" layoutX="299.0" layoutY="217.0" mnemonicParsing="false" text="total" />
             <Label layoutX="40.0" layoutY="217.0" prefHeight="17.0" prefWidth="87.0" text="tipo de seguro" />
-            <TextField fx:id="sillaBebe" layoutX="32.0" layoutY="253.0" onAction="#datoIdVehiculo" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="disGPS" layoutX="233.0" layoutY="288.0" onAction="#datoIdVehiculo" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="conductorAdicional" layoutX="233.0" layoutY="254.0" onAction="#datoIdVehiculo" prefHeight="25.0" prefWidth="22.0" text="0" />
-            <TextField fx:id="maletero" layoutX="33.0" layoutY="288.0" onAction="#datoIdVehiculo" prefHeight="25.0" prefWidth="21.0" text="0" />
-            <Button fx:id="registrarUsuario" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Registrar usuario" />
+            <TextField fx:id="sillaBebe" layoutX="32.0" layoutY="253.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="disGPS" layoutX="233.0" layoutY="288.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="conductorAdicional" layoutX="233.0" layoutY="254.0" prefHeight="25.0" prefWidth="22.0" text="0" />
+            <TextField fx:id="maletero" layoutX="33.0" layoutY="288.0" prefHeight="25.0" prefWidth="21.0" text="0" />
+            <Button fx:id="arrendarVehiculo" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" onAction="#arrendar" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Arrendar carro" />
             <Label layoutX="58.0" layoutY="292.0" prefHeight="0.0" prefWidth="125.0" text="maletero (80000)" />
             <Label layoutX="58.0" layoutY="257.0" prefHeight="0.0" prefWidth="125.0" text="silla bebe (1000000)" />
             <Label layoutX="259.0" layoutY="257.0" prefHeight="17.0" prefWidth="155.0" text="conductor adicional (50000)" />

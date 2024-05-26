@@ -24,11 +24,10 @@ public class ControladorBusqueda {
     public Button mostrarVehiculosOficina;
     public Button mostrarOficinas;
     public Button buscarVehiculo;
-    public Button pagar;
     public Button finViaje;
     public Button adicionarTiempo;
     public Button cerrarSesionArrendador;
-    public TextField txtMostrador1;
+    public TextArea txtMostrador1;
     public TextArea txtPlacaVehiculo;
     public Button mostrarVehiculosEnPropiedad;
     public Button volver;
@@ -38,7 +37,7 @@ public class ControladorBusqueda {
     public TextField sillaBebe;
     public TextField disGPS;
     public TextField conductorAdicional;
-    public Button registrarUsuario;
+    public Button arrendarVehiculo;
     public TextField maletero;
     private Empresa empresa = Empresa.getInstance();
 
@@ -50,14 +49,19 @@ public class ControladorBusqueda {
     }
 
     public void mostrarOficinas(javafx.event.ActionEvent actionEvent) {
-        txtMostrador1.setText("");
         for(Oficina s : empresa.getOficinas()){
-
-            txtMostrador1.appendText("id: " + s.getId() + " \nPais: "+ s.getPais()+ " \nCiudad: "+ s.getCiudad() +"\n");
+            txtMostrador1.appendText("id: " + s.getId() + " \nPais: "+ s.getPais()+ " \nCiudad: "+ s.getCiudad() +"\n\n");
         }
     }
 
-    public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {
+    public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {\
+        String idOficina = ingresoOficina.getText().trim();
+        if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))){
+            Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId()  == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
+            for(Vehiculo v: ofi.getVehiculos()){
+                txtMostrador1.appendText("Precio por dia: :"+v.getPrecioPorDia()+"\tCategoria: "+v.getCategoria()+"\nPlaca: "+v.getPlaca()+"\tModelo: "+v.getModelo()+"\nCantidad sillas: "+v.getCantidadSillas()+"\tMarca: "+v.getMarca()+"\nPais: "+v.getPais()+"\tCiudad: "+v.getCiudad());
+            }
+        }
     }
 
     public void datoIdOficina(javafx.event.ActionEvent actionEvent) {
@@ -129,5 +133,18 @@ public class ControladorBusqueda {
     }
 
     public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
+    }
+
+    public void arrendar(ActionEvent actionEvent) {
+        String idOficina = ingresoOficina.getText().trim();
+        String placaVehivulo =  ingresoVehiculo.getText().trim();
+        if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))) {
+            Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId() == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
+            if(ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))){
+                Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
+
+
+            }
+        }
     }
 }
