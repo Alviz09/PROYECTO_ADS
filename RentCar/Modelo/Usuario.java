@@ -11,10 +11,10 @@ public class Usuario {
     protected long telefono;
     protected String correoElectronico;
     protected String tipoDeIdentificacion;
-    protected int numeroDelIdentificacion;
+    protected long numeroDelIdentificacion;
     private ArrayList<Vehiculo> vehiculos=new ArrayList<>();
 
-    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion) {
+    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, Long numeroDelIdentificacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -25,7 +25,7 @@ public class Usuario {
         this.numeroDelIdentificacion = numeroDelIdentificacion;
     }
 
-    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, int numeroDelIdentificacion, ArrayList<Vehiculo> vehiculos) {
+    public Usuario(String nombre, String apellido, int edad, String direccion, long telefono, String correoElectronico, String tipoIdentificacion, Long numeroDelIdentificacion, ArrayList<Vehiculo> vehiculos) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -97,11 +97,11 @@ public class Usuario {
         this.tipoDeIdentificacion = tipoDeIdentificacion;
     }
 
-    public int getNumeroDelIdentificacion() {
+    public Integer getNumeroDelIdentificacion() {
         return numeroDelIdentificacion;
     }
 
-    public void setNumeroDelIdentificacion(int numeroDelIdentificacion) {
+    public void setNumeroDelIdentificacion(Long numeroDelIdentificacion) {
         this.numeroDelIdentificacion = numeroDelIdentificacion;
     }
 

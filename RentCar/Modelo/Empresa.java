@@ -30,7 +30,7 @@ public class Empresa {
 
         if(usuarioEnElSistema instanceof Arrendatario){
             Arrendatario arrendatario = (Arrendatario) usuarioEnElSistema;
-            Archivos.escribirArchivosContratos(arrendatario.getContratosVehiculos(), arrendatario.getCorreoElectronico());
+            Archivos.escribirArchivosContratos(arrendatario.getContratosVehiculos());
         }
 
     }

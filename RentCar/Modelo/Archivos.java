@@ -24,7 +24,7 @@ public class Archivos {
                 long telefono = Long.parseLong(total[5]);
                 String correoElectronico = total[6];
                 String tipoDeIdentiicaion = total[7];
-                int numeroDeIdentificacion = Integer.parseInt(total[8]);
+                Long numeroDeIdentificacion = Long.parseLong(total[8]);
                 if (tipoUsuario.equals("Arrendatario")) {
                     Boolean licenciaConduccion = Boolean.valueOf(total[9]);
                     Boolean preferencial = Boolean.valueOf(total[10]);
@@ -135,6 +135,7 @@ public class Archivos {
     public static void escribirArchivos(ArrayList<Usuario> usuarios) {
         try (BufferedWriter bwu = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/usuarios.txt", true))) {
             try (BufferedWriter bwv = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/vehiculos.txt", true))) {
+                System.out.println("lleaga a la funcion escribir ");
                 for (Usuario usuario : usuarios) {
                     bwu.write(usuario.getClass().getSimpleName() + " " +
                             usuario.getNombre() + " " +
@@ -182,8 +183,8 @@ public class Archivos {
         }
     }
 
-    public static void escribirArchivosContratos(ArrayList<Contrato> contratosUsuario, String gmailUsuario) {
-        File archivo = new File("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt");
+    public static void escribirArchivosContratos(ArrayList<Contrato> contratosUsuario) {
+        File archivo = new File("out/production/PROYECTO_ADS/resource/contratos.txt");
         try{
             if(!archivo.exists()){
                 System.out.println("helo");
@@ -194,7 +195,7 @@ public class Archivos {
             System.out.println("holoooo");
         }
 
-        try (BufferedWriter bwc = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt", true))) {
+        try (BufferedWriter bwc = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/contratos.txt", true))) {
             for (Contrato c : contratosUsuario) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 String fechaEntrega = sdf.format(c.getFechaEntrega());
@@ -208,7 +209,7 @@ public class Archivos {
 
     public static ArrayList<Contrato> leerArchivosContratos(String gmailUsuario) {
         ArrayList<Contrato> contratos = new ArrayList<Contrato>();
-        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt"))) {
+        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/contratos.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {

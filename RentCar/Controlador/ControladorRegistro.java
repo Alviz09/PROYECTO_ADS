@@ -3,6 +3,7 @@ package Controlador;
 
 import Excepciones.ExcepcionLogica;
 import Excepciones.ExcepcionRango;
+import Excepciones.ExceptionContenedor;
 import Modelo.Arrendador;
 import Modelo.Arrendatario;
 import Modelo.Empresa;
@@ -49,7 +50,7 @@ public class ControladorRegistro  {
             long telefono = Long.parseLong(arrendadorCelularTxtField.getText().trim());
             String correoElectronico = arrendadorMailTxtField.getText().trim();
             String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();
-            int numeroDelIdentificacion = Integer.parseInt(arrendadorIdTxtField.getText().trim());
+            Long numeroDelIdentificacion = Long.parseLong(arrendadorIdTxtField.getText().trim());
 
             Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
             empresa.getUsuarios().add(nuevo);
@@ -81,9 +82,22 @@ public class ControladorRegistro  {
             }
             String direccion = arrendadorDireccionTxtField.getText().trim();
             long telefono = Long.parseLong(arrendadorCelularTxtField.getText().trim());
+
+            if((telefono< Long.parseLong("3000000000"))||(telefono>Long.parseLong("4000000000"))){
+                throw new ExcepcionRango();
+            }
             String correoElectronico = arrendadorMailTxtField.getText().trim();
+            if(correoElectronico.contains("@")){
+                throw new ExceptionContenedor();
+            }
             String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();
-            int numeroDelIdentificacion = Integer.parseInt(arrendadorIdTxtField.getText().trim());
+            if(!(tipoIdentificacion.length()==2)){
+                throw new ExcepcionRango();
+            }
+            Long numeroDelIdentificacion = Long.parseLong(arrendadorIdTxtField.getText().trim());
+            if((numeroDelIdentificacion > Long.parseLong("9999999999"))||(numeroDelIdentificacion < Long.parseLong("10000000"))){
+                throw new ExcepcionRango();
+            }
             String licencia=existenciaLicencia.getText().trim();
             boolean tieneLicencia;
             if(licencia.equals("si")){
@@ -110,8 +124,10 @@ public class ControladorRegistro  {
                 e.printStackTrace();
             }
 
+        }catch(ExceptionContenedor e){
+            mostrarMensaje("el correo debe tener un @");
         }catch (ExcepcionRango e){
-            mostrarMensaje("error en la edad");
+            mostrarMensaje("error en los valores ingresados (por su rango, es decir numeros negativos y la cantidad de numeros o cadena de carecteres con cierta longitud");
         }catch (ExcepcionLogica e){
             mostrarMensaje("en apartado de licencia debe decir si o no, elija por favor");
         }catch (NumberFormatException e) {
