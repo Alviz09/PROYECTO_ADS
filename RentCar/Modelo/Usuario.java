@@ -97,8 +97,8 @@ public class Usuario {
         this.tipoDeIdentificacion = tipoDeIdentificacion;
     }
 
-    public Integer getNumeroDelIdentificacion() {
-        return numeroDelIdentificacion;
+    public int getNumeroDelIdentificacion() {
+        return (int) numeroDelIdentificacion;
     }
 
     public void setNumeroDelIdentificacion(Long numeroDelIdentificacion) {

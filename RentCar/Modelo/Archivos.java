@@ -119,7 +119,7 @@ public class Archivos {
 
         Map<Integer, Usuario> userById = new HashMap<>();
         usuarios.forEach(usuario -> {
-            userById.put(usuario.getNumeroDelIdentificacion(), usuario);
+            userById.put(((usuario.getNumeroDelIdentificacion())), usuario);
         });
         return userById;
     }
