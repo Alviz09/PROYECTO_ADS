@@ -9,7 +9,14 @@ public class Empresa {
     private static ArrayList<Oficina> oficinas  = new ArrayList<>(Archivos.cargarOficinas());
     private static ArrayList<Vehiculo> vehiculos  = new ArrayList<>(Archivos.cargarVehiculosUsuarios(usuarios,oficinas));
     private Usuario usuarioEnElSistema;
+    private ArrayList<Contrato> contratos = null ;
 
+    public ArrayList<Contrato> getContratos(){
+        return contratos;
+    }
+    public void setContratos(ArrayList<Contrato> contratos){
+        this.contratos= contratos;
+    }
     private Empresa(){
     }
 
@@ -19,6 +26,11 @@ public class Empresa {
     }
     public void guardarArchivo() {
         Archivos.escribirArchivos(usuarios);
+        if(usuarioEnElSistema instanceof Arrendatario){
+            Arrendatario arrendatario = (Arrendatario) usuarioEnElSistema;
+            Archivos.escribirArchivosContratos(arrendatario.getContratosVehiculos(), arrendatario.getCorreoElectronico());
+        }
+
     }
     public  ArrayList<Usuario> getUsuarios(){
         return usuarios;
@@ -37,4 +49,7 @@ public class Empresa {
         this.usuarioEnElSistema = usuarioEnElSistema;
     }
 
+    public void agregarContratos( String gmailUsuario){
+        this.contratos = new ArrayList<>((Archivos.leerArchivosContratos( gmailUsuario)));
+    }
 }

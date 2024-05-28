@@ -9,7 +9,7 @@ public class Contrato {
     private Date fechaEntrega; //el fecha tambien esta la hora
     private Date fechaDevolucion;
     private String placaCarro;
-    private String emailUser;
+    private String emailArrendatario;
 
     public Contrato(int id, Date todayDate, Date FinishDate, String placa, String correoElectronico) {
         this.oficinaRecogida = id;
@@ -17,7 +17,15 @@ public class Contrato {
         this.fechaEntrega = todayDate;
         this.fechaDevolucion = FinishDate;
         this.placaCarro = placa;
-        this.emailUser = correoElectronico;
+        this.emailArrendatario = correoElectronico;
+    }
+
+    public Contrato(String emailUser, String placaCarro, float valorArriendo, int oficinaRecogida, int oficinaDevolucion, Date fechaEntrega, Date fechaDevolucion) {
+        this.emailArrendatario = emailUser;
+        this.placaCarro = placaCarro;
+        this.valorArriendo = valorArriendo;
+        this.oficinaDevolucion = oficinaDevolucion;
+        this.oficinaRecogida = oficinaRecogida;
     }
 
     public void setOficinaRecogida(int oficinaRecogida) {
@@ -41,7 +49,7 @@ public class Contrato {
     }
 
     public void setEmailUser(String emailUser){
-        this.emailUser = emailUser;
+        this.emailArrendatario = emailUser;
     }
 
     // Getters
@@ -67,7 +75,7 @@ public class Contrato {
     }
 
     public String getEmailUser(){
-        return emailUser;
+        return emailArrendatario;
     }
 
     public float getValorArriendo() {

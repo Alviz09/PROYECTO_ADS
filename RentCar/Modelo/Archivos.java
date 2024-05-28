@@ -2,13 +2,15 @@ package Modelo;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Archivos {
     public static ArrayList<Usuario> cargarUsuarios() {
-        ArrayList<Usuario> usuarios= new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/usuarios.txt"))) {
             String linea;
             String total[];
@@ -30,7 +32,7 @@ public class Archivos {
                     usuarios.add(nuevoArrendatario);
                 } else {
                     Arrendador nuevoArrendador = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoDeIdentiicaion, numeroDeIdentificacion);
-                  usuarios.add(nuevoArrendador);
+                    usuarios.add(nuevoArrendador);
                 }
             }
             entrada.close();
@@ -43,6 +45,7 @@ public class Archivos {
             throw new RuntimeException("No se encontro el archivo " + e.getMessage());
         }
     }
+
     public static ArrayList<Oficina> cargarOficinas() {
         ArrayList<Oficina> oficinas = new ArrayList<>();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
@@ -53,7 +56,7 @@ public class Archivos {
             String pais;
             String ciudad;
             while ((linea = entrada.readLine()) != null) {
-                if (linea.isEmpty()){
+                if (linea.isEmpty()) {
                     return null;
                 }
                 linea.strip();
@@ -71,17 +74,17 @@ public class Archivos {
         }
     }
 
-    public static ArrayList<Vehiculo> cargarVehiculosUsuarios(ArrayList<Usuario> usuarios,ArrayList<Oficina> oficinas) {
+    public static ArrayList<Vehiculo> cargarVehiculosUsuarios(ArrayList<Usuario> usuarios, ArrayList<Oficina> oficinas) {
         Map<Integer, Usuario> userById = new HashMap<>(getUsuarioId(usuarios));
         Map<Integer, Oficina> officeById = new HashMap<>(getOfficeById(oficinas));
-        ArrayList<Vehiculo> vehiculos=new ArrayList<>();
+        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
             String linea;
             String total[];
             while ((linea = entrada.readLine()) != null) {
                 total = linea.split("\\s+");
                 int idUser = Integer.parseInt(total[0]);
-                int idOffice=Integer.parseInt(total[1]);
+                int idOffice = Integer.parseInt(total[1]);
                 int idTarjetaDePropiedad0 = Integer.parseInt(total[2]);
                 int cantidadSillas = Integer.parseInt(total[3]);
                 int numPuertas = Integer.parseInt(total[4]);
@@ -96,7 +99,7 @@ public class Archivos {
                 String pais = total[13];
                 String categoria = total[14];
                 boolean kitCarretera = Boolean.parseBoolean(total[15]);
-                Vehiculo nuevo=new Vehiculo (idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
+                Vehiculo nuevo = new Vehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
                 userById.get(idUser).crearVehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
                 officeById.get(idOffice).crearVehiculo(idTarjetaDePropiedad0, cantidadSillas, numPuertas, capacidadLitrosMoto, color, placa, marca, modelo, precioPorDia, tipoVehiculo, ciudad, pais, categoria, kitCarretera);
                 vehiculos.add(nuevo);
@@ -112,7 +115,6 @@ public class Archivos {
     }
 
 
-
     public static Map<Integer, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
 
         Map<Integer, Usuario> userById = new HashMap<>();
@@ -121,8 +123,9 @@ public class Archivos {
         });
         return userById;
     }
+
     public static Map<Integer, Oficina> getOfficeById(ArrayList<Oficina> oficinas) {
-        Map<Integer, Oficina> officeById= new HashMap<>();
+        Map<Integer, Oficina> officeById = new HashMap<>();
         oficinas.forEach(oficina -> {
             officeById.put(oficina.getId(), oficina);
         });
@@ -130,9 +133,9 @@ public class Archivos {
     }
 
     public static void escribirArchivos(ArrayList<Usuario> usuarios) {
-        try (BufferedWriter bwu = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/usuarios.txt", true))){
-            try(BufferedWriter bwv = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/vehiculos.txt", true))) {
-                for(Usuario usuario : usuarios) {
+        try (BufferedWriter bwu = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/usuarios.txt", true))) {
+            try (BufferedWriter bwv = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/vehiculos.txt", true))) {
+                for (Usuario usuario : usuarios) {
                     bwu.write(usuario.getClass().getSimpleName() + " " +
                             usuario.getNombre() + " " +
                             usuario.getApellido() + " " +
@@ -142,15 +145,14 @@ public class Archivos {
                             usuario.getCorreoElectronico() + " " +
                             usuario.getTipoDeIdentificacion() + " " +
                             usuario.getNumeroDelIdentificacion());
-                    for(Vehiculo vehiculo : usuario.getVehiculos()) {
+                    for (Vehiculo vehiculo : usuario.getVehiculos()) {
                         String oficinaId = vehiculo.getCiudad();
-                        if(oficinaId == "Cali") {
+                        if (oficinaId == "Cali") {
                             oficinaId = "58402";
                         }
-                        if(oficinaId == "Bogota") {
+                        if (oficinaId == "Bogota") {
                             oficinaId = "19827";
-                        }
-                        else {
+                        } else {
                             oficinaId = "45036";
                         }
                         bwv.write(usuario.getNumeroDelIdentificacion() + " " +
@@ -172,11 +174,58 @@ public class Archivos {
 
                     }
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void escribirArchivosContratos(ArrayList<Contrato> contratosUsuario, String gmailUsuario) {
+
+        try (BufferedWriter bwc = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt", true))) {
+            for (Contrato c : contratosUsuario) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                String fechaEntrega = sdf.format(c.getFechaEntrega());
+                String fechaDevolucion = sdf.format(c.getFechaDevolucion());
+                bwc.write(c.getEmailUser() + " " + c.getPlacaCarro() + " " + c.getValorArriendo() + " " + c.getOficinaRecogida() + " " + c.getOficinaDevolucion() + " " + fechaEntrega + " " + fechaDevolucion);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Contrato> leerArchivosContratos(String gmailUsuario) {
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt"))) {
+            String linea;
+            String total[];
+            while ((linea = entrada.readLine()) != null) {
+                total = linea.split("\\s+");
+                String emailUser = total[0];
+                String placaCarro = total[1];
+                float valorArriendo = Float.parseFloat(total[2]);
+                int oficinaRecogida = Integer.parseInt(total[3]);
+                int OficinaDevolucion = Integer.parseInt(total[4]);
+                String fechaEntrega = (total[5]);
+                String fechaDevolucion = total[6];
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+                Date dateEntrega = formato.parse(fechaEntrega);
+                Date dateDevolucion = formato.parse(fechaDevolucion);
+                Contrato contrato = new Contrato(emailUser, placaCarro, valorArriendo, oficinaRecogida, OficinaDevolucion, dateEntrega, dateDevolucion);
+                contratos.add(contrato);
+
+            }
+            entrada.close();
+            if (!contratos.isEmpty()) {
+                return contratos;
+            }
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }

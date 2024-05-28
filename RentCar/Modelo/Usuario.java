@@ -21,7 +21,7 @@ public class Usuario {
         this.direccion = direccion;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
-        this.tipoDeIdentificacion = tipoDeIdentificacion;
+        this.tipoDeIdentificacion = tipoIdentificacion;
         this.numeroDelIdentificacion = numeroDelIdentificacion;
     }
 

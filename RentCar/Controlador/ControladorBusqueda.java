@@ -215,13 +215,16 @@ public class ControladorBusqueda {
                 Vehiculo vehiculo = arrendatario.getVehiculos().stream().filter(v -> v.getPlaca().equals(placa)).limit(1).findFirst().orElse(null);
                 contrato.setFechaDevolucion(sumarDiasAFecha(contrato.getFechaDevolucion(), Integer.parseInt(dias)));
                 contrato.setValorArriendo((contrato.getValorArriendo())+(vehiculo.getPrecioPorDia()*Integer.parseInt(dias)));
-                mostrarMensaje("se realizo la amplitud de tiempo");
+                mostrarMensaje("se realizo la amplitud de tiempo, en el contrato se hicieron los cambios correspondientes");
 
+            }else{
+                mostrarMensaje("esa placa no se encuentra registrada en sus arriendos");
             }
 
 
+
         }catch (NumberFormatException e){
-            mostrarMensaje("no ingreso en numeros la fecha");
+            mostrarMensaje("no ingreso en el formato debido (solo numeros enteros)");
         }
 
     }
