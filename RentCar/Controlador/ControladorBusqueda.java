@@ -84,6 +84,7 @@ public class ControladorBusqueda {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void ejecutarBuscadorArrendatario(javafx.event.ActionEvent actionEvent) {

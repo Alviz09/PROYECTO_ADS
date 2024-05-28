@@ -76,6 +76,7 @@ public class ControladorMenuPrincipal {
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
                 empresa.setContratos(Archivos.leerArchivosContratos(empresa.getUsuarioEnElSistema().getCorreoElectronico()));
+                empresa.agregarContratos( user.getCorreoElectronico());
             } catch (IOException e) {
                 e.printStackTrace();
             }
