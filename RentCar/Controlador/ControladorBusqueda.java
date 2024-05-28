@@ -2,6 +2,7 @@ package Controlador;
 
 import Excepciones.ExcepcionDisponibilidad;
 import Excepciones.ExcepcionLogica;
+import Excepciones.ExcepcionRango;
 import Modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,6 +57,7 @@ public class ControladorBusqueda {
     public TextField txtNumTarjeta;
     public TextField txtCSV;
     private Empresa empresa = Empresa.getInstance();
+    private Contrato contratoActual;
 
 
 
@@ -145,14 +147,17 @@ public class ControladorBusqueda {
     public void eliminarVehiculo(ActionEvent actionEvent) {
         String placa = txtPlacaVehiculo.getText().trim();
         if (empresa.getContratos().stream().anyMatch(contrato -> contrato.getPlacaCarro().equals(placa))){
+            Contrato contrato = empresa.getContratos().stream().filter(contrato1 -> contrato1.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null);
+            contratoActual=contrato;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/PagarView.fxml"));
-                Stage stage = (Stage) cerrarSesionArrendador.getScene().getWindow();
+                Stage stage = (Stage) terminarViaje.getScene().getWindow();
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
         }else{
             mostrarMensaje("esa placa no existe en sus vehiculos");
@@ -267,8 +272,32 @@ public class ControladorBusqueda {
     }
 
     public void calcularValorTotal(ActionEvent actionEvent) {
+            mostrarMensaje("se va a realizar el pago de : " + contratoActual + " pesos, ingrese su tarjeta");
     }
 
     public void realizarPago(ActionEvent actionEvent) {
+        try{
+            String tarjeta = (txtNumTarjeta.getText().trim());
+            String csv = (txtCSV.getText().trim());
+            int tarjetaComprobacion= Integer.parseInt(tarjeta);
+            int csvComprobacion= Integer.parseInt(csv);
+            if((!( tarjeta.length() == 16 ))||(!(csv.length() == 3))){
+                throw new ExcepcionRango();
+            }
+            mostrarMensaje("se realizo pago");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenter.fxml"));
+                Stage stage = (Stage) realizarPago.getScene().getWindow();
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }catch (ExcepcionRango e){
+            mostrarMensaje(" la tarjeta no tiene 16 caracteres o el csv no tiene 3 caracteres");
+        }catch (NumberFormatException e){
+            mostrarMensaje(" no se ingreso la informacion como informacion numerica");
+        }
+
     }
 }

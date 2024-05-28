@@ -25,7 +25,9 @@ public class Empresa {
         return EMPRESA;
     }
     public void guardarArchivo() {
+        System.out.println("llegoooooo");
         Archivos.escribirArchivos(usuarios);
+
         if(usuarioEnElSistema instanceof Arrendatario){
             Arrendatario arrendatario = (Arrendatario) usuarioEnElSistema;
             Archivos.escribirArchivosContratos(arrendatario.getContratosVehiculos(), arrendatario.getCorreoElectronico());

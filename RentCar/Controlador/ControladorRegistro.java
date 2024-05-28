@@ -101,7 +101,14 @@ public class ControladorRegistro  {
             }
             empresa.guardarArchivo();
             mostrarMensaje("Registro existoso");
-
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MainView.fxml"));
+                Stage stage = (Stage) registrarArrendatario.getScene().getWindow();
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }catch (ExcepcionRango e){
             mostrarMensaje("error en la edad");
