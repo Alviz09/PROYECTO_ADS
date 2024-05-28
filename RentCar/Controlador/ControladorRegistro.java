@@ -1,5 +1,8 @@
 package Controlador;
 
+
+import Excepciones.ExcepcionLogica;
+import Excepciones.ExcepcionRango;
 import Modelo.Arrendador;
 import Modelo.Arrendatario;
 import Modelo.Empresa;
@@ -73,6 +76,9 @@ public class ControladorRegistro  {
             String nombre = arrendadorNombreTxtField.getText().trim();
             String apellido = arrendadorApellitdoTxtField.getText().trim();
             int edad = Integer.parseInt(arrendadorEdadTxtField.getText().trim());
+            if(edad<18){
+                throw new ExcepcionRango();
+            }
             String direccion = arrendadorDireccionTxtField.getText().trim();
             long telefono = Long.parseLong(arrendadorCelularTxtField.getText().trim());
             String correoElectronico = arrendadorMailTxtField.getText().trim();
@@ -80,25 +86,32 @@ public class ControladorRegistro  {
             int numeroDelIdentificacion = Integer.parseInt(arrendadorIdTxtField.getText().trim());
             String licencia=existenciaLicencia.getText().trim();
             boolean tieneLicencia;
-            if(licencia.equals("no"))
+            if(licencia.equals("si")){
                 tieneLicencia=true;
-            else
+            }else if(licencia.equals("no")){
                 tieneLicencia=false;
+            }else{
+                throw new ExcepcionLogica();
+            }
             boolean preferencial=false;
             Arrendatario nuevo = new Arrendatario(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion,tieneLicencia,preferencial);
             empresa.getUsuarios().add(nuevo);
+            for(Usuario u : empresa.getUsuarios()){
+                System.out.println(u.getNombre()+"\n");
+            }
+            empresa.guardarArchivo();
             mostrarMensaje("Registro existoso");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MainView.fxml"));
-            Scene mainScene = new Scene(loader.load());Stage stage = (Stage) confirmarRegistroArrendador.getScene().getWindow();
-            stage.setScene(mainScene);
-            stage.show();
 
-        } catch (NumberFormatException e) {
+        }catch (ExcepcionRango e){
+            mostrarMensaje("error en la edad");
+        }catch (ExcepcionLogica e){
+            mostrarMensaje("en apartado de licencia debe decir si o no, elija por favor");
+        }catch (NumberFormatException e) {
 
             mostrarMensaje("Ingrese bien los dsatos de su celular y ID");
         } catch (Exception e) {
-
+            e.printStackTrace();
             mostrarMensaje("Error en el registro de Arrendador");
         }
     }
@@ -125,47 +138,6 @@ public class ControladorRegistro  {
                 });
             }
         });
-    }
-
-    @FXML
-    public void validarRegistro() throws Exception {
-        try {
-            String correoElectronico = eMail.getText().trim();
-            String contraseña = password.getText().trim();
-            int contrasena = Integer.parseInt(contraseña);
-
-            // Encuentra el usuario que coincide con el correo electrónico y la contraseña (ID)
-            Usuario usuario = empresa.getUsuarios().stream()
-                    .filter(u -> u.getCorreoElectronico().equals(correoElectronico) && u.getNumeroDelIdentificacion() == contrasena)
-                    .findFirst()
-                    .orElse(null);
-
-            if (usuario != null) {
-                // Si el usuario existe, llama al método setUsuarioEnElSistema
-                empresa.setUsuarioEnElSistema(usuario);
-                mensajeInicioDeSesion.setText("Inicio de sesión exitoso");
-
-                // Aquí puedes agregar el código para cambiar a la vista principal si es necesario
-            } else {
-                mensajeInicioDeSesion.setText("Usuario o contraseña no existen, intente otra vez");
-            }
-        } catch (NumberFormatException e) {
-            mostrarMensaje("Intente ingresar su contraseña de nuevo, su contraseña es su ID");
-        } catch (Exception e) {
-            mostrarMensaje("Intente ingresar su contraseña de nuevo, su contraseña es su ID");
-        }
-    }
-
-    @FXML
-    public void registroOnAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/RegisterView.fxml"));
-            Stage stage = (Stage) registrarse.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML

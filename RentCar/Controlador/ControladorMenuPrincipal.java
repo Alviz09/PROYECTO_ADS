@@ -58,7 +58,7 @@ public class ControladorMenuPrincipal {
             else
                 mensajeInicioDeSesion.setText("Usuario o contraseña no existen, intente otra vez");
         }catch (NumberFormatException e){
-            mostrarMensaje("Su contraseña es su ID");
+            mostrarMensaje("Su contraseña es incorrecta");
         }
     }
     private void mostrarMensaje(String mensaje) {

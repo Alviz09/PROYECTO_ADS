@@ -114,7 +114,7 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="registrarArrendatario" layoutX="130.0" layoutY="361.0" mnemonicParsing="false" onAction="#registrarArrendatario" text="Confirmar" />
+                <Button fx:id="registrarArrendatario" layoutX="121.0" layoutY="350.0" mnemonicParsing="false" onAction="#registrarArrendatario" text="Confirmar" />
                 <Button fx:id="volver" layoutX="9.0" layoutY="19.0" mnemonicParsing="false" onAction="#volverARegisterView" prefHeight="25.0" prefWidth="30.0" text="&lt;-" />
             <Label alignment="CENTER" layoutX="121.0" layoutY="286.0" prefHeight="23.0" prefWidth="34.0" text="ID">
                <font>

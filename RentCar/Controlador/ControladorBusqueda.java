@@ -175,8 +175,8 @@ public class ControladorBusqueda {
                     contrato.setValorArriendo(precio);
                     Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
                     arrendatario.getContratosVehiculos().add(contrato);
-
-                    mostrarMensaje("se creo el cotrato con la informacion, paguelo cuando puedda");
+                    empresa.guardarArchivo();
+                    mostrarMensaje("se creo el cotrato con la informacion, paguelo cuando pueda\n");
                 }else{
                     mostrarMensaje("esa placa no existe");
                 }
@@ -216,6 +216,7 @@ public class ControladorBusqueda {
                 Vehiculo vehiculo = arrendatario.getVehiculos().stream().filter(v -> v.getPlaca().equals(placa)).limit(1).findFirst().orElse(null);
                 contrato.setFechaDevolucion(sumarDiasAFecha(contrato.getFechaDevolucion(), Integer.parseInt(dias)));
                 contrato.setValorArriendo((contrato.getValorArriendo())+(vehiculo.getPrecioPorDia()*Integer.parseInt(dias)));
+                empresa.guardarArchivo();
                 mostrarMensaje("se realizo la amplitud de tiempo, en el contrato se hicieron los cambios correspondientes");
 
             }else{

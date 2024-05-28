@@ -183,6 +183,16 @@ public class Archivos {
     }
 
     public static void escribirArchivosContratos(ArrayList<Contrato> contratosUsuario, String gmailUsuario) {
+        File archivo = new File("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt");
+        try{
+            if(!archivo.exists()){
+                System.out.println("helo");
+                archivo.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("holoooo");
+        }
 
         try (BufferedWriter bwc = new BufferedWriter(new FileWriter("out/production/PROYECTO_ADS/resource/" + gmailUsuario + ".txt", true))) {
             for (Contrato c : contratosUsuario) {
