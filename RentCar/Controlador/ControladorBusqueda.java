@@ -33,7 +33,7 @@ public class ControladorBusqueda {
     public Button adicionarTiempo;
     public Button cerrarSesionArrendador;
     public TextArea txtMostrador1;
-    public TextArea txtPlacaVehiculo;
+    public TextField txtPlacaVehiculo;
     public Button mostrarVehiculosEnPropiedad;
     public Button volver;
     public CheckBox getVentanas;
@@ -49,6 +49,12 @@ public class ControladorBusqueda {
     public TextField ingresoPlaca;
     public TextField diasRequeridos;
     public TextField diasAgregar;
+    public Button terminarViaje;
+    public TextArea txtMostradorPago;
+    public Button verValorTotal;
+    public Button realizarPago;
+    public TextField txtNumTarjeta;
+    public TextField txtCSV;
     private Empresa empresa = Empresa.getInstance();
 
 
@@ -133,9 +139,24 @@ public class ControladorBusqueda {
     }
 
     public void datoPlacaVehiculo(ActionEvent actionEvent) {
+
     }
 
     public void eliminarVehiculo(ActionEvent actionEvent) {
+        String placa = txtPlacaVehiculo.getText().trim();
+        if (empresa.getContratos().stream().anyMatch(contrato -> contrato.getPlacaCarro().equals(placa))){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/PagarView.fxml"));
+                Stage stage = (Stage) cerrarSesionArrendador.getScene().getWindow();
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else{
+            mostrarMensaje("esa placa no existe en sus vehiculos");
+        }
     }
 
     public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
@@ -243,5 +264,11 @@ public class ControladorBusqueda {
         calendar.setTime(fecha);
         calendar.add(Calendar.DAY_OF_YEAR, dias);
         return calendar.getTime();
+    }
+
+    public void calcularValorTotal(ActionEvent actionEvent) {
+    }
+
+    public void realizarPago(ActionEvent actionEvent) {
     }
 }
