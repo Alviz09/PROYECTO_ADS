@@ -2,6 +2,7 @@ package Modelo;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.lang.runtime.TemplateRuntime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -43,6 +44,35 @@ public class Archivos {
 
         } catch (Exception e) {
             throw new RuntimeException("No se encontro el archivo " + e.getMessage());
+        }
+    }
+    public static  void actualizarArchivos(Usuario nuevo ){
+        try(FileWriter fw= new FileWriter("out/production/PROYECTO_ADS/resource/usuarios.txt", true);BufferedWriter salida= new BufferedWriter(fw);) {
+            if(nuevo instanceof Arrendatario) {
+                salida.write("Arrendatario");
+                salida.write(nuevo.nombre);
+                salida.write(nuevo.apellido);
+                salida.write(nuevo.edad);
+                salida.write(nuevo.direccion);
+                salida.write(String.valueOf(nuevo.telefono));
+                salida.write(nuevo.correoElectronico);
+                salida.write(nuevo.tipoDeIdentificacion);
+                salida.write(String.valueOf(nuevo.numeroDelIdentificacion));
+            }
+            if(nuevo instanceof Arrendador) {
+                salida.write("Arrendador");
+                salida.write(nuevo.nombre);
+                salida.write(nuevo.apellido);
+                salida.write(nuevo.edad);
+                salida.write(nuevo.direccion);
+                salida.write(String.valueOf(nuevo.telefono));
+                salida.write(nuevo.correoElectronico);
+                salida.write(nuevo.tipoDeIdentificacion);
+                salida.write(String.valueOf(nuevo.numeroDelIdentificacion));
+                salida.write(nuevo.);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
