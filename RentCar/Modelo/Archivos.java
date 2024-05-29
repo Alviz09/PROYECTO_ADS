@@ -75,7 +75,7 @@ public class Archivos {
     }
 
     public static ArrayList<Vehiculo> cargarVehiculosUsuarios(ArrayList<Usuario> usuarios, ArrayList<Oficina> oficinas) {
-        Map<Integer, Usuario> userById = new HashMap<>(getUsuarioId(usuarios));
+        Map<Long, Usuario> userById = new HashMap<>(getUsuarioId(usuarios));
         Map<Integer, Oficina> officeById = new HashMap<>(getOfficeById(oficinas));
         ArrayList<Vehiculo> vehiculos = new ArrayList<>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/vehiculos.txt"))) {
@@ -83,7 +83,7 @@ public class Archivos {
             String total[];
             while ((linea = entrada.readLine()) != null) {
                 total = linea.split("\\s+");
-                int idUser = Integer.parseInt(total[0]);
+                Long idUser = Long.parseLong(total[0]);
                 int idOffice = Integer.parseInt(total[1]);
                 int idTarjetaDePropiedad0 = Integer.parseInt(total[2]);
                 int cantidadSillas = Integer.parseInt(total[3]);
@@ -115,9 +115,9 @@ public class Archivos {
     }
 
 
-    public static Map<Integer, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
+    public static Map<Long, Usuario> getUsuarioId(ArrayList<Usuario> usuarios) {
 
-        Map<Integer, Usuario> userById = new HashMap<>();
+        Map<Long, Usuario> userById = new HashMap<>();
         usuarios.forEach(usuario -> {
             userById.put(((usuario.getNumeroDelIdentificacion())), usuario);
         });
@@ -207,7 +207,7 @@ public class Archivos {
         }
     }
 
-    public static ArrayList<Contrato> leerArchivosContratos(String gmailUsuario) {
+    public static ArrayList<Contrato> leerArchivosContratos() {
         ArrayList<Contrato> contratos = new ArrayList<Contrato>();
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/contratos.txt"))) {
             String linea;
@@ -221,7 +221,7 @@ public class Archivos {
                 int OficinaDevolucion = Integer.parseInt(total[4]);
                 String fechaEntrega = (total[5]);
                 String fechaDevolucion = total[6];
-                SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
                 Date dateEntrega = formato.parse(fechaEntrega);
                 Date dateDevolucion = formato.parse(fechaDevolucion);
                 Contrato contrato = new Contrato(emailUser, placaCarro, valorArriendo, oficinaRecogida, OficinaDevolucion, dateEntrega, dateDevolucion);

@@ -3,6 +3,7 @@ package Controlador;
 import Excepciones.ExcepcionDisponibilidad;
 import Excepciones.ExcepcionLogica;
 import Excepciones.ExcepcionRango;
+import Excepciones.ExceptionContenedor;
 import Modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -51,7 +52,6 @@ public class ControladorBusqueda {
     public TextField diasRequeridos;
     public TextField diasAgregar;
     public Button terminarViaje;
-    public TextArea txtMostradorPago;
     public Button verValorTotal;
     public Button realizarPago;
     public TextField txtNumTarjeta;
@@ -70,17 +70,28 @@ public class ControladorBusqueda {
     }
 
     public void mostrarVehiculos(javafx.event.ActionEvent actionEvent) {
-        String idOficina = ingresoOficina.getText().trim();
-        if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))){
-            Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId()  == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
-            for(Vehiculo v: ofi.getVehiculos()){
-                txtMostrador1.appendText("\nPrecio por dia: :"+v.getPrecioPorDia()+"\tCategoria: "+v.getCategoria()+"\nPlaca: "+v.getPlaca()+"\tModelo: "+v.getModelo()+"\nCantidad sillas: "+v.getCantidadSillas()+"\tMarca: "+v.getMarca()+"\nPais: "+v.getPais()+"\tCiudad: "+v.getCiudad()+"\n");
+        try{
+            String idOficina = ingresoOficina.getText().trim();
+            if(idOficina==""){
+                throw new ExceptionContenedor();
             }
+            if(empresa.getOficinas().stream().anyMatch(of -> of.getId()  == Integer.parseInt(idOficina))){
+                Oficina ofi = empresa.getOficinas().stream().filter(o -> o.getId()  == Integer.parseInt(idOficina)).limit(1).findFirst().orElse(null);
+                for(Vehiculo v: ofi.getVehiculos()){
+                    txtMostrador1.appendText("\nPrecio por dia: :"+v.getPrecioPorDia()+"\tCategoria: "+v.getCategoria()+"\nPlaca: "+v.getPlaca()+"\tModelo: "+v.getModelo()+"\nCantidad sillas: "+v.getCantidadSillas()+"\tMarca: "+v.getMarca()+"\nPais: "+v.getPais()+"\tCiudad: "+v.getCiudad()+"\n");
+                }
+            }else{
+                throw new ExceptionContenedor();
+            }
+        }catch(ExceptionContenedor e ){
+            mostrarMensaje("no existe oficina");
+
+        }catch (NumberFormatException e){
+            mostrarMensaje("no existe oficina");
         }
+
     }
 
-    public void datoIdOficina(javafx.event.ActionEvent actionEvent) {
-    }
 
 
     public void volverMenuArrendador(javafx.event.ActionEvent actionEvent) {
@@ -140,9 +151,6 @@ public class ControladorBusqueda {
         }
     }
 
-    public void datoPlacaVehiculo(ActionEvent actionEvent) {
-
-    }
 
     public void eliminarVehiculo(ActionEvent actionEvent) {
         String placa = txtPlacaVehiculo.getText().trim();
@@ -164,8 +172,6 @@ public class ControladorBusqueda {
         }
     }
 
-    public void ejecutarBuscadorVehiculos(ActionEvent actionEvent) {
-    }
 
     public void arrendar(ActionEvent actionEvent) {
         try {
@@ -177,7 +183,7 @@ public class ControladorBusqueda {
                 if (ofi.getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placaVehivulo))) {
 
                     float precio = 0;
-                    Vehiculo v = ofi.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
+                    Vehiculo v = empresa.getVehiculos().stream().filter(vehi -> vehi.getPlaca().equals(placaVehivulo)).limit(1).findFirst().orElse(null);
                     if(!(v.getdisponibilidad())){
                         throw new ExcepcionDisponibilidad();
                     }
@@ -199,9 +205,8 @@ public class ControladorBusqueda {
                     Contrato contrato = new Contrato(ofi.getId(), todayDate, sumarDiasAFecha(todayDate, Integer.parseInt(diasRequeridos.getText().trim())), v.getPlaca(), empresa.getUsuarioEnElSistema().getCorreoElectronico());
                     v.setDisponibilidad(false);
                     contrato.setValorArriendo(precio);
-                    Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
-                    arrendatario.getContratosVehiculos().add(contrato);
-                    empresa.guardarArchivo();
+                    empresa.getContratos().add(contrato);
+                    empresa.getUsuarioEnElSistema().getVehiculos().add(v);
                     mostrarMensaje("se creo el cotrato con la informacion, paguelo cuando pueda\n");
                 }else{
                     mostrarMensaje("esa placa no existe");
@@ -234,24 +239,31 @@ public class ControladorBusqueda {
         try{
             String placa = ingresoPlaca.getText().trim();
             String dias = diasAgregar.getText().trim();
+            if((Integer.parseInt(dias)<1)){
+                throw new ExcepcionRango();
+            }
             // no se hace instance of porque se hizo cuando se ingreso a la vista
             if (empresa.getUsuarioEnElSistema().getVehiculos().stream().anyMatch(vehi -> vehi.getPlaca().equals(placa))){
-                Arrendatario arrendatario = (Arrendatario) empresa.getUsuarioEnElSistema();
+                System.out.println(placa+"\n");
+                for(Contrato c: empresa.getContratos()){
+                    System.out.println(c.getPlacaCarro());
+                }
 
-                Contrato contrato = arrendatario.getContratosVehiculos().stream().filter(c -> c.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null);
-                Vehiculo vehiculo = arrendatario.getVehiculos().stream().filter(v -> v.getPlaca().equals(placa)).limit(1).findFirst().orElse(null);
+                Contrato contrato = empresa.getContratos().stream().filter(c -> c.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null);
+                Vehiculo vehiculo = empresa.getUsuarioEnElSistema().getVehiculos().stream().filter(v -> v.getPlaca().equals(placa)).limit(1).findFirst().orElse(null);
                 contrato.setFechaDevolucion(sumarDiasAFecha(contrato.getFechaDevolucion(), Integer.parseInt(dias)));
                 contrato.setValorArriendo((contrato.getValorArriendo())+(vehiculo.getPrecioPorDia()*Integer.parseInt(dias)));
-                empresa.guardarArchivo();
+
                 mostrarMensaje("se realizo la amplitud de tiempo, en el contrato se hicieron los cambios correspondientes");
 
             }else{
                 mostrarMensaje("esa placa no se encuentra registrada en sus arriendos");
             }
 
-
-
-        }catch (NumberFormatException e){
+        }catch(ExcepcionRango e){
+            mostrarMensaje("dias mal ingresados");
+        }
+        catch (NumberFormatException e){
             mostrarMensaje("no ingreso en el formato debido (solo numeros enteros)");
         }
 
@@ -263,12 +275,12 @@ public class ControladorBusqueda {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-    public Date sumarDiasAFecha(Date fecha, int dias){
-        if (dias==0) return fecha;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fecha);
-        calendar.add(Calendar.DAY_OF_YEAR, dias);
-        return calendar.getTime();
+    public Date sumarDiasAFecha(Date fecha, int dias) {
+
+        long milisegundosPorDia = 24 * 60 * 60 * 1000L;
+        long milisegundosASumar = dias * milisegundosPorDia;
+        Date fechaFinal = new Date(fecha.getTime() + milisegundosASumar);
+        return fechaFinal ;
     }
 
     public void calcularValorTotal(ActionEvent actionEvent) {

@@ -7,7 +7,7 @@ public class Arrendatario extends Usuario{
     private boolean preferencial;
     private boolean contrato;
     private int leaseNumber=0;
-    private ArrayList<Contrato> contratosVehiculos = new ArrayList<Contrato>() ;
+
 
 
 
@@ -76,11 +76,4 @@ public Arrendatario(String nombre, String apellido, int edad, String direccion, 
                 "Preferencial "+preferencial+ '\'';
     }
 
-    public ArrayList<Contrato> getContratosVehiculos() {
-        return contratosVehiculos;
-    }
-
-    public void setContratosVehiculos(ArrayList<Contrato> contratosVehiculos) {
-        this.contratosVehiculos = contratosVehiculos;
-    }
 }

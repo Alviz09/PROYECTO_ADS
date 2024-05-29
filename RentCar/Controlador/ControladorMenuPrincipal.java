@@ -52,6 +52,11 @@ public class ControladorMenuPrincipal {
                 mensajeInicioDeSesion.setText("inicio de sesion existoso");
                 Usuario user = empresa.getUsuarios().stream().filter(usuario -> usuario.getCorreoElectronico().equals(correoElectronico)).limit(1).findFirst().orElse(null);
                 empresa.setUsuarioEnElSistema(user);
+                for(Vehiculo v : empresa.getVehiculos()){
+                    if(empresa.getContratos().stream().anyMatch(contrato -> contrato.getPlacaCarro().equals(v.getPlaca()))){
+                        v.setDisponibilidad(false);
+                    }
+                }
                 abrirBusqueda(user);
             }
 
@@ -75,8 +80,15 @@ public class ControladorMenuPrincipal {
                 Stage stage = (Stage) registrarse.getScene().getWindow();
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
-                empresa.setContratos(Archivos.leerArchivosContratos(empresa.getUsuarioEnElSistema().getCorreoElectronico()));
-                empresa.agregarContratos( user.getCorreoElectronico());
+                for(Contrato c : empresa.getContratos()){
+                    if(empresa.getUsuarioEnElSistema().getCorreoElectronico().equals(c.getEmailUser())){
+                        Vehiculo v = empresa.getVehiculos().stream().filter(vehiculo -> vehiculo.getPlaca().equals(c.getPlacaCarro())).limit(1).findFirst().orElse(null);
+                        empresa.getUsuarioEnElSistema().getVehiculos().add(v);
+                    }
+
+                }
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

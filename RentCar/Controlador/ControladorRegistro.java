@@ -87,7 +87,7 @@ public class ControladorRegistro  {
                 throw new ExcepcionRango();
             }
             String correoElectronico = arrendadorMailTxtField.getText().trim();
-            if(correoElectronico.contains("@")){
+            if(!(correoElectronico.contains("@"))){
                 throw new ExceptionContenedor();
             }
             String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();

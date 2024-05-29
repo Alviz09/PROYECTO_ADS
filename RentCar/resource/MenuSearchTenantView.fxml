@@ -24,7 +24,7 @@
     <center>
         <AnchorPane prefHeight="332.0" prefWidth="276.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" layoutX="83.0" layoutY="22.0" prefHeight="18.0" prefWidth="276.0" text="Menu opciones">
+                <Label alignment="CENTER" layoutX="84.0" layoutY="58.0" prefHeight="18.0" prefWidth="276.0" text="Menu opciones">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
@@ -32,10 +32,10 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="recibirPago" layoutX="88.0" layoutY="220.0" mnemonicParsing="false" onAction="#recibirPago" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: CFCFCF;" text="Informacion para poder recibir pagos" />
-                <Button fx:id="informacionVehiculo" layoutX="116.0" layoutY="160.0" mnemonicParsing="false" onAction="#informacionVehiculos" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar informacion de vehiculos" />
-                <Button fx:id="adicionarTiempo" layoutX="116.0" layoutY="100.0" mnemonicParsing="false" onAction="#arriendoCarro" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Asignar carro a oficina" />
-                <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="283.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
+                <Button fx:id="recibirPago" layoutX="116.0" layoutY="204.0" mnemonicParsing="false" onAction="#recibirPago" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: CFCFCF;" text="Informacion para poder recibir pagos" />
+                <Button fx:id="informacionVehiculo" layoutX="116.0" layoutY="157.0" mnemonicParsing="false" onAction="#informacionVehiculos" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar informacion de vehiculos" />
+                <Button fx:id="adicionarTiempo" layoutX="116.0" layoutY="111.0" mnemonicParsing="false" onAction="#arriendoCarro" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Asignar carro a oficina" />
+                <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="250.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
             </children>
         </AnchorPane>
     </center>
