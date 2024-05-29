@@ -19,7 +19,7 @@
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextArea fx:id="mostradorArrendador" layoutX="32.0" layoutY="36.0" prefHeight="328.0" prefWidth="315.0" />
+            <TextArea fx:id="txtMostrador" layoutX="32.0" layoutY="36.0" prefHeight="328.0" prefWidth="315.0" />
             </children>
         </AnchorPane>
     </left>
@@ -35,7 +35,7 @@
                     </effect>
                 </Label>
                 <Button fx:id="salirTenant" layoutX="57.0" layoutY="274.0" mnemonicParsing="false" onAction="#salirTenant" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="salir" />
-            <Button fx:id="botonMostrar" layoutX="95.0" layoutY="110.0" mnemonicParsing="false" onAction="#mostrarVehiculos" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: CFCFCF;" text="Mostrar" />
+            <Button fx:id="botonMostrar" layoutX="95.0" layoutY="110.0" mnemonicParsing="false" onAction="#mostrarVehiculosPropiedad" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: CFCFCF;" text="Mostrar" />
             </children>
         </AnchorPane>
     </center>

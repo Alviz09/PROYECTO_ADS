@@ -71,6 +71,8 @@ public class ControladorBusqueda {
     public TextField tarjetaPropiedad;
     public CheckBox kitCarretera;
     public TextField pais;
+    public Button informacionVehiculos;
+    public Button carroAOficina;
     private Empresa empresa = Empresa.getInstance();
     private Contrato contratoActual;
 
@@ -100,6 +102,8 @@ public class ControladorBusqueda {
 
         }catch (NumberFormatException e){
             mostrarMensaje("no existe oficina");
+        }catch (NullPointerException e){
+            mostrarMensaje("se escribio vacio");
         }
 
     }
@@ -326,20 +330,42 @@ public class ControladorBusqueda {
     }
 
     public void recibirPago(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/FormaRecibirPagoView.fxml"));
+            Stage stage = (Stage) recibirPago.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void informacionVehiculos(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MostrarInfoVehiculoView.fxml"));
+            Stage stage = (Stage) informacionVehiculos.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public void agregar(ActionEvent actionEvent) {
         try{
-            String placa = ingresoPlaca.getText().trim();
+            String placaa = placa.getText().trim();
+            if((placaa.length())!=6){
+               throw new ExcepcionRango();
+            }
             String marcaa = marca.getText().trim();
             String modeloo = modelo.getText().trim();
             float precioDiaa= Float.parseFloat(precioDia.getText().trim());
             String tipoVehiculoo= tipoVehiculo.getText().trim();
             String ciudadd= ciudad.getText().trim();
             int oficinaa= Integer.parseInt(idOficina.getText().trim());
+            if(!(empresa.getOficinas().stream().anyMatch(oficina -> oficina.getId()==oficinaa))){
+                throw new ExcepcionLogica();
+            }
             int cantiSillass= Integer.parseInt(cantiSillas.getText().trim());
             int numPuertass= Integer.parseInt(numPuertas.getText().trim());
             float litrosMotorr = Float.parseFloat(litrosMotor.getText().trim());
@@ -347,9 +373,15 @@ public class ControladorBusqueda {
             String categoriaa= categoria.getText().trim();
             String paiss = pais.getText().trim();
             int tarjetaPropiedadd = Integer.parseInt(tarjetaPropiedad.getText().trim());
-            Vehiculo v = new Vehiculo(tarjetaPropiedadd,cantiSillass,numPuertass, litrosMotorr, colorr, placa, marcaa, modeloo, precioDiaa, tipoVehiculoo, ciudadd, paiss, categoriaa, kitCarretera.isSelected());
+            Vehiculo v = new Vehiculo(tarjetaPropiedadd,cantiSillass,numPuertass, litrosMotorr, colorr, placaa, marcaa, modeloo, precioDiaa, tipoVehiculoo, ciudadd, paiss, categoriaa, kitCarretera.isSelected());
             empresa.getVehiculos().add(v);
             empresa.getUsuarioEnElSistema().getVehiculos().add(v);
+        }catch (ExcepcionRango e) {
+
+            mostrarMensaje("La placa debe tener 6 digitos");
+        } catch (ExcepcionLogica e) {
+
+            mostrarMensaje("La oficina debe existir");
         } catch (NumberFormatException e) {
 
             mostrarMensaje("Ingrese bien los dsatos de su celular y ID");
@@ -360,5 +392,24 @@ public class ControladorBusqueda {
     }
 
     public void salirTenant(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchTenantView.fxml"));
+            Stage stage = (Stage) salirTenant.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void carroAOficina(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/ArrendarVehiculoView.fxml"));
+            Stage stage = (Stage) carroAOficina.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
