@@ -212,8 +212,10 @@ public class Archivos {
         try (BufferedReader entrada = new BufferedReader(new FileReader("out/production/PROYECTO_ADS/resource/contratos.txt"))) {
             String linea;
             String total[];
+            String fechaSepa0 [];
+            String fechaSepa1 [];
             while ((linea = entrada.readLine()) != null) {
-                total = linea.split("\\s+");
+                total = linea.split("\s+");
                 String emailUser = total[0];
                 String placaCarro = total[1];
                 float valorArriendo = Float.parseFloat(total[2]);
@@ -222,9 +224,18 @@ public class Archivos {
                 String fechaEntrega = (total[5]);
                 String fechaDevolucion = total[6];
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-                Date dateEntrega = formato.parse(fechaEntrega);
-                Date dateDevolucion = formato.parse(fechaDevolucion);
+                fechaSepa0 = fechaEntrega.split("/");
+                int anio0 = Integer.parseInt(fechaSepa0[0]);
+                int mes0 = Integer.parseInt(fechaSepa0[1]);
+                int dias0 = Integer.parseInt(fechaSepa0[2]);
+                Date dateEntrega = new Date(anio0,mes0,dias0);
+                fechaSepa1 = fechaDevolucion.split("/");
+                int anio1 = Integer.parseInt(fechaSepa1[0]);
+                int mes1 = Integer.parseInt(fechaSepa1[1]);
+                int dias1 = Integer.parseInt(fechaSepa1[2]);
+                Date dateDevolucion = new Date(anio1,mes1,dias1);
                 Contrato contrato = new Contrato(emailUser, placaCarro, valorArriendo, oficinaRecogida, OficinaDevolucion, dateEntrega, dateDevolucion);
+
                 contratos.add(contrato);
 
             }
@@ -234,8 +245,6 @@ public class Archivos {
             }
             return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }

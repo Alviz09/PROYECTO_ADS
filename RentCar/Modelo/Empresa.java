@@ -10,6 +10,7 @@ public class Empresa {
     private static ArrayList<Vehiculo> vehiculos  = new ArrayList<>(Archivos.cargarVehiculosUsuarios(usuarios,oficinas));
     private static ArrayList<Contrato> contratos = new ArrayList<>(Archivos.leerArchivosContratos());
     private Usuario usuarioEnElSistema;
+    private Contrato contratoEnELSistema;
 
 
     public ArrayList<Contrato> getContratos(){
@@ -51,4 +52,11 @@ public class Empresa {
         this.usuarioEnElSistema = usuarioEnElSistema;
     }
 
+    public Contrato getContratoEnELSistema() {
+        return contratoEnELSistema;
+    }
+
+    public void setContratoEnELSistema(Contrato contratoEnELSistema) {
+        this.contratoEnELSistema = contratoEnELSistema;
+    }
 }

@@ -3,6 +3,7 @@ package Controlador;
 
 import Excepciones.ExcepcionLogica;
 import Excepciones.ExcepcionRango;
+import Excepciones.ExcepcionRepeticion;
 import Excepciones.ExceptionContenedor;
 import Modelo.Arrendador;
 import Modelo.Arrendatario;
@@ -46,11 +47,29 @@ public class ControladorRegistro  {
             String nombre = arrendadorNombreTxtField.getText().trim();
             String apellido = arrendadorApellitdoTxtField.getText().trim();
             int edad = Integer.parseInt(arrendadorEdadTxtField.getText().trim());
+            if(edad<18){
+                throw new ExcepcionRango();
+            }
             String direccion = arrendadorDireccionTxtField.getText().trim();
             long telefono = Long.parseLong(arrendadorCelularTxtField.getText().trim());
+            if((telefono< Long.parseLong("3000000000"))||(telefono>Long.parseLong("4000000000"))){
+                throw new ExcepcionRango();
+            }
             String correoElectronico = arrendadorMailTxtField.getText().trim();
+            if(!(correoElectronico.contains("@"))){
+                throw new ExceptionContenedor();
+            }
+            if(empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico))){
+                throw new ExcepcionRepeticion();
+            }
             String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();
+            if(!(tipoIdentificacion.length()==2)){
+                throw new ExcepcionRango();
+            }
             Long numeroDelIdentificacion = Long.parseLong(arrendadorIdTxtField.getText().trim());
+            if((numeroDelIdentificacion > Long.parseLong("9999999999"))||(numeroDelIdentificacion < Long.parseLong("10000000"))){
+                throw new ExcepcionRango();
+            }
 
             Arrendador nuevo = new Arrendador(nombre, apellido, edad, direccion, telefono, correoElectronico, tipoIdentificacion, numeroDelIdentificacion);
             empresa.getUsuarios().add(nuevo);
@@ -61,11 +80,17 @@ public class ControladorRegistro  {
             stage.setScene(mainScene);
             stage.show();
 
-        } catch (NumberFormatException e) {
+        } catch  (ExcepcionRepeticion e){
+            mostrarMensaje("Correo ya existe");
+        } catch (ExceptionContenedor e){
+            mostrarMensaje("el correo debe tener un @");
+        }catch (ExcepcionRango e){
+            mostrarMensaje("error en los valores ingresados (por su rango, es decir numeros negativos y la cantidad de numeros o cadena de carecteres con cierta longitud");
+        }catch (NumberFormatException e) {
 
-            mostrarMensaje("Error en el formato de los datos");
+            mostrarMensaje("Ingrese bien los dsatos de su celular y ID");
         } catch (Exception e) {
-
+            e.printStackTrace();
             mostrarMensaje("Error en el registro de Arrendador");
         }
     }
@@ -89,6 +114,9 @@ public class ControladorRegistro  {
             String correoElectronico = arrendadorMailTxtField.getText().trim();
             if(!(correoElectronico.contains("@"))){
                 throw new ExceptionContenedor();
+            }
+            if(empresa.getUsuarios().stream().anyMatch(usuario -> usuario.getCorreoElectronico().equals(correoElectronico))){
+                throw new ExcepcionRepeticion();
             }
             String tipoIdentificacion = arrendadorTipoDocTxtField.getText().trim();
             if(!(tipoIdentificacion.length()==2)){
@@ -124,7 +152,9 @@ public class ControladorRegistro  {
                 e.printStackTrace();
             }
 
-        }catch(ExceptionContenedor e){
+        }catch  (ExcepcionRepeticion e){
+            mostrarMensaje("Correo ya existe");
+        } catch (ExceptionContenedor e){
             mostrarMensaje("el correo debe tener un @");
         }catch (ExcepcionRango e){
             mostrarMensaje("error en los valores ingresados (por su rango, es decir numeros negativos y la cantidad de numeros o cadena de carecteres con cierta longitud");

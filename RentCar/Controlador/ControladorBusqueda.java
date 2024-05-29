@@ -1,9 +1,6 @@
 package Controlador;
 
-import Excepciones.ExcepcionDisponibilidad;
-import Excepciones.ExcepcionLogica;
-import Excepciones.ExcepcionRango;
-import Excepciones.ExceptionContenedor;
+import Excepciones.*;
 import Modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ControladorBusqueda {
 
 
-    public TextArea txtMostradorFinViaje;
+
     public TextField ingresoVehiculo;
     public TextField ingresoOficina;
     public Button mostrarVehiculosOficina;
@@ -56,11 +53,26 @@ public class ControladorBusqueda {
     public Button realizarPago;
     public TextField txtNumTarjeta;
     public TextField txtCSV;
+    public Button recibirPago;
+    public Button botonAgregar;
+    public Button salirTenant;
+    public TextField cantiSillas;
+    public TextField litrosMotor;
+    public TextField numPuertas;
+    public TextField color;
+    public TextField idOficina;
+    public TextField marca;
+    public TextField precioDia;
+    public TextField modelo;
+    public TextField tipoVehiculo;
+    public TextField placa;
+    public TextField categoria;
+    public TextField ciudad;
+    public TextField tarjetaPropiedad;
+    public CheckBox kitCarretera;
+    public TextField pais;
     private Empresa empresa = Empresa.getInstance();
     private Contrato contratoActual;
-
-
-
 
 
     public void mostrarOficinas(javafx.event.ActionEvent actionEvent) {
@@ -155,8 +167,7 @@ public class ControladorBusqueda {
     public void eliminarVehiculo(ActionEvent actionEvent) {
         String placa = txtPlacaVehiculo.getText().trim();
         if (empresa.getContratos().stream().anyMatch(contrato -> contrato.getPlacaCarro().equals(placa))){
-            Contrato contrato = empresa.getContratos().stream().filter(contrato1 -> contrato1.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null);
-            contratoActual=contrato;
+            empresa.setContratoEnELSistema(empresa.getContratos().stream().filter(contrato1 -> contrato1.getPlacaCarro().equals(placa)).limit(1).findFirst().orElse(null));
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/PagarView.fxml"));
                 Stage stage = (Stage) terminarViaje.getScene().getWindow();
@@ -231,6 +242,7 @@ public class ControladorBusqueda {
             }
         }catch (NullPointerException e){
             mostrarMensaje("no tiene vehiculos en uso este usuario");
+            e.printStackTrace();
         }
 
     }
@@ -284,21 +296,21 @@ public class ControladorBusqueda {
     }
 
     public void calcularValorTotal(ActionEvent actionEvent) {
-            mostrarMensaje("se va a realizar el pago de : " + contratoActual + " pesos, ingrese su tarjeta");
+            mostrarMensaje("se va a realizar el pago de : " + empresa.getContratoEnELSistema().getValorArriendo() + " pesos, ingrese su tarjeta");
     }
 
     public void realizarPago(ActionEvent actionEvent) {
         try{
             String tarjeta = (txtNumTarjeta.getText().trim());
             String csv = (txtCSV.getText().trim());
-            int tarjetaComprobacion= Integer.parseInt(tarjeta);
+            Long tarjetaComprobacion= Long.parseLong(tarjeta);
             int csvComprobacion= Integer.parseInt(csv);
             if((!( tarjeta.length() == 16 ))||(!(csv.length() == 3))){
                 throw new ExcepcionRango();
             }
             mostrarMensaje("se realizo pago");
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenter.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchRenterView.fxml"));
                 Stage stage = (Stage) realizarPago.getScene().getWindow();
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
@@ -311,5 +323,42 @@ public class ControladorBusqueda {
             mostrarMensaje(" no se ingreso la informacion como informacion numerica");
         }
 
+    }
+
+    public void recibirPago(ActionEvent actionEvent) {
+    }
+
+    public void informacionVehiculos(ActionEvent actionEvent) {
+    }
+    
+    public void agregar(ActionEvent actionEvent) {
+        try{
+            String placa = ingresoPlaca.getText().trim();
+            String marcaa = marca.getText().trim();
+            String modeloo = modelo.getText().trim();
+            float precioDiaa= Float.parseFloat(precioDia.getText().trim());
+            String tipoVehiculoo= tipoVehiculo.getText().trim();
+            String ciudadd= ciudad.getText().trim();
+            int oficinaa= Integer.parseInt(idOficina.getText().trim());
+            int cantiSillass= Integer.parseInt(cantiSillas.getText().trim());
+            int numPuertass= Integer.parseInt(numPuertas.getText().trim());
+            float litrosMotorr = Float.parseFloat(litrosMotor.getText().trim());
+            String colorr= color.getText().trim();
+            String categoriaa= categoria.getText().trim();
+            String paiss = pais.getText().trim();
+            int tarjetaPropiedadd = Integer.parseInt(tarjetaPropiedad.getText().trim());
+            Vehiculo v = new Vehiculo(tarjetaPropiedadd,cantiSillass,numPuertass, litrosMotorr, colorr, placa, marcaa, modeloo, precioDiaa, tipoVehiculoo, ciudadd, paiss, categoriaa, kitCarretera.isSelected());
+            empresa.getVehiculos().add(v);
+            empresa.getUsuarioEnElSistema().getVehiculos().add(v);
+        } catch (NumberFormatException e) {
+
+            mostrarMensaje("Ingrese bien los dsatos de su celular y ID");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarMensaje("Error en el registro de Arrendador");
+        }
+    }
+
+    public void salirTenant(ActionEvent actionEvent) {
     }
 }

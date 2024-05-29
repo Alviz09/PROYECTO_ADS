@@ -35,7 +35,7 @@
                 </Label>
                 <Button fx:id="finViaje" layoutX="116.0" layoutY="248.0" mnemonicParsing="false" onAction="#finViaje" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Darle fin al viaje" />
                 <Button fx:id="adicionarTiempo" layoutX="116.0" layoutY="153.0" mnemonicParsing="false" onAction="#AdicionarTiempo" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Adicionar tiempo de uso" />
-                <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="296.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
+                <Button fx:id="salirTenant" layoutX="116.0" layoutY="296.0" mnemonicParsing="false" onAction="#salirTenant" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="salir" />
             </children>
         </AnchorPane>
     </center>

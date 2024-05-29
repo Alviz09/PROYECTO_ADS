@@ -96,7 +96,7 @@ public class ControladorMenuPrincipal {
         else{
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/MenuSearchTenantView.fxml"));
-                Stage stage = (Stage) registrarse.getScene().getWindow();
+                Stage stage = (Stage) iniciarSesion.getScene().getWindow();
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
             } catch (IOException e) {

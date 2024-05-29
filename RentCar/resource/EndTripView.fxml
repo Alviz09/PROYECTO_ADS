@@ -20,7 +20,7 @@
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextArea fx:id="txtMostradorFinViaje" layoutX="67.0" layoutY="31.0" prefHeight="323.0" prefWidth="239.0" wrapText="true" />
+            <TextArea fx:id="txtMostrador" layoutX="67.0" layoutY="31.0" prefHeight="323.0" prefWidth="239.0" wrapText="true" />
             </children>
         </AnchorPane>
     </left>

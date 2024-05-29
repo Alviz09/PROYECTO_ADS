@@ -12,21 +12,21 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ControladorBusqueda">
     <left>
-        <AnchorPane prefHeight="416.0" prefWidth="245.0" style="-fx-background-color: CFCFCF;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="380.0" style="-fx-background-color: CFCFCF;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="144.0" fitWidth="226.0" layoutX="38.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../logo.png" />
                     </image>
                 </ImageView>
-            <TextArea fx:id="mostrador" layoutX="32.0" layoutY="36.0" prefHeight="328.0" prefWidth="200.0" />
+            <TextArea fx:id="mostradorArrendador" layoutX="32.0" layoutY="36.0" prefHeight="328.0" prefWidth="315.0" />
             </children>
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="332.0" prefWidth="276.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="317.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" layoutX="138.0" layoutY="48.0" prefHeight="18.0" prefWidth="161.0" text="Mostrar vehiculos">
+                <Label alignment="CENTER" layoutX="82.0" layoutY="46.0" prefHeight="18.0" prefWidth="161.0" text="Mostrar vehiculos">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
@@ -34,8 +34,8 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="salirTenant" layoutX="113.0" layoutY="251.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="salir" />
-            <Button fx:id="botonMostrar" layoutX="150.0" layoutY="149.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: CFCFCF;" text="Mostrar" />
+                <Button fx:id="salirTenant" layoutX="57.0" layoutY="274.0" mnemonicParsing="false" onAction="#salirTenant" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="salir" />
+            <Button fx:id="botonMostrar" layoutX="95.0" layoutY="110.0" mnemonicParsing="false" onAction="#mostrarVehiculos" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: CFCFCF;" text="Mostrar" />
             </children>
         </AnchorPane>
     </center>

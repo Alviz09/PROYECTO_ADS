@@ -32,9 +32,9 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="recibirPago" layoutX="116.0" layoutY="204.0" mnemonicParsing="false" onAction="#recibirPago" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: CFCFCF;" text="Informacion para poder recibir pagos" />
-                <Button fx:id="informacionVehiculo" layoutX="116.0" layoutY="157.0" mnemonicParsing="false" onAction="#informacionVehiculos" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar informacion de vehiculos" />
-                <Button fx:id="adicionarTiempo" layoutX="116.0" layoutY="111.0" mnemonicParsing="false" onAction="#arriendoCarro" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Asignar carro a oficina" />
+                <Button fx:id="recibirPago" layoutX="106.0" layoutY="204.0" mnemonicParsing="false" onAction="#recibirPago" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: CFCFCF;" text="Informacion para poder recibir pagos" />
+                <Button fx:id="informacionVehiculos" layoutX="116.0" layoutY="157.0" mnemonicParsing="false" onAction="#informacionVehiculos" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Mostrar informacion de vehiculos" />
+                <Button fx:id="carroAOficina" layoutX="116.0" layoutY="111.0" mnemonicParsing="false" onAction="#carroAOficina" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Asignar carro a oficina" />
                 <Button fx:id="cerrarSesionArrendador" layoutX="116.0" layoutY="250.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: CFCFCF;" text="Cerrar sesion" />
             </children>
         </AnchorPane>
